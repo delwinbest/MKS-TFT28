@@ -12,9 +12,9 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "C:/Users/mail/git/MKS-TFT28/.pio/build/genericSTM32F103VC/firmware.elf",
+            "executable": "c:/Users/mail/git/MKS-TFT28/.pio/build/MKSTFT_F107VC/firmware.elf",
             "toolchainBinDir": "C:/Users/mail/.platformio/packages/toolchain-gccarmnoneeabi/bin",
-            "svdPath": "C:/Users/mail/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd",
+            "svdPath": "C:/Users/mail/.platformio/platforms/ststm32@src-5df80be2dc12905ba432b44f9b67c343/misc/svd/STM32F107xx.svd",
             "preLaunchTask": {
                 "type": "PlatformIO",
                 "task": "Pre-Debug"
@@ -25,9 +25,9 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "C:/Users/mail/git/MKS-TFT28/.pio/build/genericSTM32F103VC/firmware.elf",
+            "executable": "c:/Users/mail/git/MKS-TFT28/.pio/build/MKSTFT_F107VC/firmware.elf",
             "toolchainBinDir": "C:/Users/mail/.platformio/packages/toolchain-gccarmnoneeabi/bin",
-            "svdPath": "C:/Users/mail/.platformio/platforms/ststm32/misc/svd/STM32F103xx.svd",
+            "svdPath": "C:/Users/mail/.platformio/platforms/ststm32@src-5df80be2dc12905ba432b44f9b67c343/misc/svd/STM32F107xx.svd",
             "internalConsoleOptions": "openOnSessionStart"
         }
     ]
