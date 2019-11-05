@@ -122,7 +122,7 @@ extern "C" {
   * @retval None
   */
 
-#if defined(STM32F107xC) && defined(MKS_TFT)
+#if defined(STM32F107xC) 
 //extern HCD_HandleTypeDef hhcd_USB_OTG_FS;
 //extern TIM_HandleTypeDef htim2;
 //extern UART_HandleTypeDef huart3;
