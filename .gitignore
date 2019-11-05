@@ -34,3 +34,5 @@
 # build Folder
 .pio
 .vscode
+*.bin
+*.hex
