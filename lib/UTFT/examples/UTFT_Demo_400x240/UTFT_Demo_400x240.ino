@@ -1,34 +1,36 @@
-#include <Arduino.h>
+// UTFT_Demo_400x240 
+// Copyright (C)2015 Rinky-Dink Electronics, Henning Karlsen. All right reserved
+// web: http://www.RinkyDinkElectronics.com/
+//
+// This program is a demo of how to use most of the functions
+// of the library with a supported display modules.
+//
+// This demo was made for modules with a screen resolution 
+// of 4000x240 pixels.
+//
+// This program requires the UTFT library.
+// tested    by huawei<huaweiwx@sina.com> 2016.12.20
+//    spfd5420
+
 #include <UTFT.h>
 
+extern uint8_t SmallFont[];
 #define WITCH 400
+
+UTFTCLASS myGLCD;     //board default BSP_TFT_LCD config
+
 #define LED LED_BUILTIN
 
-extern uint8_t SmallFont[];
-
-
-//UTFT lcdthingyname(byte model, int RS, int WR, int CS, int RST, int SER)
-UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,0);
-
-
-void setup() {
-  // put your setup code here, to run once:
-  // initialize digital pin SPEAKER as an output.
-  pinMode(SPEAKER, OUTPUT);
-
+void setup()
+{
   randomSeed(analogRead(0));
-  // Setup the LCD
+// Setup the LCD
   myGLCD.Init();
   myGLCD.setFont(SmallFont);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-  // digitalWrite(SPEAKER, HIGH);   // turn the SPEAKER on (HIGH is the voltage level)
-  // delay(1000);                       // wait for a second
-  // digitalWrite(SPEAKER, LOW);    // turn the SPEAKER off by making the voltage LOW
-  // delay(1000); 
-
+void loop()
+{
   int buf[WITCH-2];
   int x, x2;
   int y, y2;
@@ -46,7 +48,7 @@ void loop() {
   myGLCD.printStr("* STM32 Color TFT Display Library *", CENTER, 1);
   myGLCD.setBackColor(64, 64, 64);
   myGLCD.setColor(255,255,0);
-  myGLCD.printStr("<darkspr1te>", CENTER, 227);
+  myGLCD.printStr("<huaweiwx@sina.com>", CENTER, 227);
 
   myGLCD.setColor(0, 0, 255);
   myGLCD.drawRect(0, 14, WITCH-1, 225);
@@ -319,3 +321,4 @@ void loop() {
   
   delay (10000);
 }
+
