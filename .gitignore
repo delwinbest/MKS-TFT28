@@ -33,3 +33,4 @@
 
 # build Folder
 .pio
+.vscode
