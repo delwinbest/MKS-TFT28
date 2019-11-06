@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <UTFT.h>
+#include "buzzer.h"
 
 #define WITCH 400
 #define LED LED_BUILTIN
@@ -11,15 +12,17 @@ extern uint8_t SmallFont[];
 UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,0);
 
 
+
 void setup() {
   // put your setup code here, to run once:
-  // initialize digital pin SPEAKER as an output.
-  pinMode(SPEAKER, OUTPUT);
 
+  BUZZER_Init();
   randomSeed(analogRead(0));
   // Setup the LCD
   myGLCD.Init();
   myGLCD.setFont(SmallFont);
+  BUZZER_ShortBeep();
+  
 }
 
 void loop() {
@@ -114,7 +117,7 @@ void loop() {
   }
 
   delay(2000);
-  
+  BUZZER_ShortBeep();
   myGLCD.setColor(0,0,0);
   myGLCD.fillRect(1,15,WITCH-2,224);
 
