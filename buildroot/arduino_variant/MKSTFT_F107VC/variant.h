@@ -87,7 +87,7 @@ extern "C" {
 
 
 #define LCD_LED PD14
-#define SPEAKER PA2
+#define BUZZER_Pin PA2
 #define FILIMENT PB0
 #define POWER PB1
 #define LCD_WR PB14
@@ -168,8 +168,8 @@ extern "C" {
 // USB
 #define USB_DISC_PIN            PB9
 /*
-#define SPEAKER_Pin             GPIO_PIN_2
-#define SPEAKER_GPIO_Port       GPIOA
+//#define SPEAKER_Pin             GPIO_PIN_2
+//#define SPEAKER_GPIO_Port       GPIOA
 #define SDCARD_nCS_Pin          GPIO_PIN_11
 #define SDCARD_nCS_GPIO_Port    GPIOD
 #define FLASH_nCS_Pin           GPIO_PIN_9
@@ -188,8 +188,8 @@ VECT_TAB_SRAM
 
 */
  //#define VECT_TAB_SRAM
- #define SPEAKER_Pin             GPIO_PIN_2
- #define SPEAKER_GPIO_Port       GPIOA
+ //#define SPEAKER_Pin             GPIO_PIN_2
+ //#define SPEAKER_GPIO_Port       GPIOA
  #define FILAMENT_DI_Pin         GPIO_PIN_0
  #define FILAMENT_DI_GPIO_Port   GPIOB
  #define POWER_DI_Pin            GPIO_PIN_1
