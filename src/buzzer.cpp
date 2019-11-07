@@ -5,6 +5,10 @@ TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(BUZ
 uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(BUZZER_Pin), PinMap_PWM));
 HardwareTimer *tim2 = new HardwareTimer(Instance);
 
+void TIM_Callback(HardwareTimer*){
+
+}
+
 void BUZZER_Init(void)
 {   
     Serial1.print("Init Buzzer...");
@@ -20,7 +24,8 @@ void BUZZER_Init(void)
     tim2->setOverflow(5000, HERTZ_FORMAT); // 10000 microseconds = 10 milliseconds
 
 
-
+    tim2->attachInterrupt(TIM_Callback);
+    tim2->attachInterrupt(channel, TIM_Callback);
     
     tim2->pause();
     Serial1.print("DONE");
@@ -31,6 +36,6 @@ void BUZZER_ShortBeep()
 	Serial1.print("beep");
     tim2->resume();
 	delay(500);
-	tim2->pause();
-    tim2->setCount(0);
+	tim2->pause();  
 }
+
