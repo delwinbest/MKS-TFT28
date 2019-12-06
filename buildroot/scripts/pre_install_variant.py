@@ -3,7 +3,7 @@ from distutils.dir_util import copy_tree
 
 # access to global construction environment
 print(env)
-
+print(env.Dump())
 # Get Arduino Variant Path for STM32 Platform
 FRAMEWORK_DIR = env.PioPlatform().get_package_dir("framework-arduinoststm32")
 VARIANT_DIR = FRAMEWORK_DIR + "/variants"
