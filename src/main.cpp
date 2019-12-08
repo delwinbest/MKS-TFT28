@@ -18,10 +18,11 @@ void setup() {
   Serial1.begin(115200);  //TX=PA9,RX=PA10
   Serial1.println("Booting");
   BUZZER_Init();
-  randomSeed(analogRead(0));
   // Setup the LCD
   myGLCD.Init();
+  myGLCD.lcdOn();
   myGLCD.setFont(SmallFont);
+  myGLCD.clrScr();
   BUZZER_ShortBeep();
   
 }

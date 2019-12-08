@@ -37,7 +37,9 @@ extern "C" {
 /*----------------------------------------------------------------------------
  *        Pins
  *----------------------------------------------------------------------------*/
-
+#if defined(HAL_ETH_MODULE_ENABLED)
+#undef HAL_ETH_MODULE_ENABLED
+#endif
 // Right side
 #define PB11 0
 #define PB10 1
@@ -73,25 +75,46 @@ extern "C" {
 #define PB13 30
 #define PB12 31
 // Other
-#define PB8  32 // BOOT0 - User buttons
+#define PB8  32 //  - User buttons
 #define PB1  33 // LED
 #define PB9  34 // USB DISC
 
 #define PD14 35//LCD_LED
-#define PD15 36//LCD RS
+#define PD15 36//LCD RD
 #define PC8 37//LCD CS
 #define PC5 38//Touch IRQ
 #define PD11 39 //SDCARD Chip Select
-#define PD12 40//LCD_RD  this was PD15, seems to be a typo
+#define PD15 40//LCD_RD 
 #define PC12 41//unknown yet
+#define PE0 42
+#define PE1 43
+#define PE2 44
+#define PE3 45
+#define PE4 46
+#define PE5 47
+#define PE6 48
+#define PD13 49 //LCD_RS
+#define PC9 50//TOUCH_CS
+#define PE7 51//PE7
+#define PC10 52
+#define PC11 53
+#define PC12 54
+#define PC13 55
+#define PD8 56
+#define PD9 57
+#define PD10 58
+#define PD11 59
+#define PD5 60
+#define PD6 61
 
 
+#define TOUCH_SCK PC10
 #define LCD_LED PD14
-#define BUZZER_Pin PA2
+#define SPEAKER PA2
 #define FILIMENT PB0
 #define POWER PB1
 #define LCD_WR PB14
-#define LCD_RS PD15
+#define LCD_RS PD13
 #define LCD_CS PC8
 #define LCD_RD PD15
 #define SDCARD_CS PD11
@@ -107,8 +130,11 @@ extern "C" {
 #define POWER_Pin POWER
 #define EEPROM_CS PIN_SPI2_SS
 
+#define SERIALRX2 PD8 //uart 3 alt config
+#define SERIALTX2 PD9//uart 3 alt config
+
 // This must be a literal
-#define NUM_DIGITAL_PINS        44
+#define NUM_DIGITAL_PINS        62 //dont forget to update this when adding new pins to pinarray darkspr1te- segfault hey 
 // This must be a literal with a value less than or equal to to MAX_ANALOG_INPUTS
 #define NUM_ANALOG_INPUTS       9
 #define NUM_ANALOG_FIRST        35
@@ -116,36 +142,31 @@ extern "C" {
 // On-board LED pin number
 #define LED_BUILTIN             PD14
 #define LED_GREEN               LED_BUILTIN
-#define LED_RED  PB1
+#define LED_RED  PB0
 
 // SPI Definitions
-#define PIN_SPI0_SS              PA4
-#define PIN_SPI0_MOSI            PA7
-#define PIN_SPI0_MISO            PA6
-#define PIN_SPI0_SCK             PA5
+#define PIN_SPI_SS              PA4
+#define PIN_SPI_MOSI            PA7
+#define PIN_SPI_MISO            PA6
+#define PIN_SPI_SCK             PA5
 
 // SPI Definitions
-#define PIN_SPI1_SS              PA15
-#define PIN_SPI1_MOSI            PB5
-#define PIN_SPI1_MISO            PB4
-#define PIN_SPI1_SCK             PB3
+#define PIN_SPI2_SS              PA15
+#define PIN_SPI2_MOSI            PB5
+#define PIN_SPI2_MISO            PB4
+#define PIN_SPI2_SCK             PB3
 
 // SPI2 Definitions
-#define PIN_SPI2_SS              PB12
-#define PIN_SPI2_MOSI            PB15
-#define PIN_SPI2_MISO            PB14
-#define PIN_SPI2_SCK             PB13
+#define PIN_SPI1_SS              PC9
+#define PIN_SPI1_MOSI            PC12
+#define PIN_SPI1_MISO            PC11
+#define PIN_SPI1_SCK             PC10
 
-#define PIN_SPI_SS              PB12
-#define PIN_SPI_MOSI            PB15
-#define PIN_SPI_MISO            PB14
-#define PIN_SPI_SCK             PB13
-/*
- #define SDCARD_nCS_Pin          GPIO_PIN_11
- #define SDCARD_nCS_GPIO_Port    GPIOD
- #define SDCARD_DETECT_Pin       GPIO_PIN_15
- #define SDCARD_DETECT_GPIO_Port GPIOB
- */
+#define PIN_SPI0_SS              PB12
+#define PIN_SPI0_MOSI            PB15
+#define PIN_SPI0_MISO            PB14
+#define PIN_SPI0_SCK             PB13
+
   
 // I2C Definitions
 #define PIN_WIRE_SDA            PB7
@@ -162,34 +183,32 @@ extern "C" {
 #define SERIAL_UART_INSTANCE    1
 // Default pin used for 'Serial' instance
 // Mandatory for Firmata
-#define PIN_SERIAL_RX           PA10
-#define PIN_SERIAL_TX           PA9
+#define PIN_SERIAL_RX           PA10//def usart1 wifi rx labels are correct for tx/rx
+#define PIN_SERIAL_TX           PA9//def usart1 wifi tx 
 
+#define PIN_SERIAL2_RX           PD6//uart2 connect to AUX-1 //PA3//PA3//
+#define PIN_SERIAL2_TX           PD5//uart2 connect to AUX-1 //PA2//PA2 speaker
+
+#define PIN_SERIAL3_TX           PD8 //PB10 //wifi txd // uart 3 default config PD9 label on board are swapped for tx/rx 
+#define PIN_SERIAL3_RX           PD9 //PB11 //wifi rxd //uart 3 defualt config 
 // USB
 #define USB_DISC_PIN            PB9
-/*
-//#define SPEAKER_Pin             GPIO_PIN_2
-//#define SPEAKER_GPIO_Port       GPIOA
-#define SDCARD_nCS_Pin          GPIO_PIN_11
-#define SDCARD_nCS_GPIO_Port    GPIOD
-#define FLASH_nCS_Pin           GPIO_PIN_9
-#define FLASH_nCS_GPIO_Port     GPIOB
-*/
+
 //#define MAIN_PR_OFFSET 0x8000
-//#define HSE_VALUE               25000000U //< Default value of the External oscillator in Hz.
+//#define HSE_VALUE               25000000U /*!< Default value of the External oscillator in Hz.*/
 //#define VECT_TAB_SRAM 1
 /*
 VECT_TAB_OFFSET
 VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; // Vector Table Relocation in Internal SRAM. 
+  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. 
 #else
-  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; // Vector Table Relocation in Internal FLASH. 
+  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. *
 #endif
 
 */
  //#define VECT_TAB_SRAM
- //#define SPEAKER_Pin             GPIO_PIN_2
- //#define SPEAKER_GPIO_Port       GPIOA
+ #define SPEAKER_Pin             GPIO_PIN_2
+ #define SPEAKER_GPIO_Port       GPIOA
  #define FILAMENT_DI_Pin         GPIO_PIN_0
  #define FILAMENT_DI_GPIO_Port   GPIOB
  #define POWER_DI_Pin            GPIO_PIN_1
@@ -249,7 +268,8 @@ VECT_TAB_SRAM
 // SERIAL_PORT_HARDWARE_OPEN  Hardware serial ports which are open for use.  Their RX & TX
 //                            pins are NOT connected to anything by default.
 #define SERIAL_PORT_MONITOR     Serial
-#define SERIAL_PORT_HARDWARE    Serial1
+#define SERIAL_PORT_HARDWARE    Serial
+//#define SERIAL_PORT_HARDWARE_OPEN Serial3
 #endif
 
 #endif /* _VARIANT_ARDUINO_STM32_ */
