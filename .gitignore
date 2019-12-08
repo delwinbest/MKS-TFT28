@@ -36,3 +36,6 @@
 .vscode
 *.bin
 *.hex
+
+#ignore linker which is modified each build
+buildroot/arduino_variant/MKSTFT_F107VC/ldscript.ld
