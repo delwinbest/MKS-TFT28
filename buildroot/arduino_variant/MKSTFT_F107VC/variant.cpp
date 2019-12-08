@@ -223,7 +223,7 @@ WEAK void SystemInit_B (void)
 
   /* Reset SW, HPRE, PPRE1, PPRE2, ADCPRE and MCO bits */
 #if !defined(STM32F105xC) && !defined(STM32F107xC)
-  RCC->CFGR &= (uint32_t)0xF0FF0000;
+  RCC->CFGR &= (uint32_t)0xF8FF0000;
 #else
   RCC->CFGR &= (uint32_t)0xF0FF0000;
 #endif /* STM32F105xC */
@@ -412,7 +412,7 @@ tmp=0x4;
 
 
 
-WEAK void SystemClock_Config(void)
+void SystemClock_Config(void)
 {
     // RCC_OscInitTypeDef RCC_OscInitStruct;
     // RCC_ClkInitTypeDef RCC_ClkInitStruct;
