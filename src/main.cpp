@@ -119,7 +119,7 @@ void loop() {
   }
 
   delay(2000);
-  BUZZER_ShortBeep();
+  // BUZZER_ShortBeep();
   myGLCD.setColor(0,0,0);
   myGLCD.fillRect(1,15,WIDTH-2,224);
 
