@@ -148,6 +148,7 @@
 #define SERIAL_5PIN		5
 #define LATCHED_16		17
 
+
 #define NOTINUSE		255
 
 //*********************************
@@ -228,6 +229,10 @@ class UTFT
 		int		getDisplayYSize();
         int     readID(void);			  
 		int     mode_id;
+		int h_read_DATA(void);
+		void h_write_COM(int thing);
+		void h_write_DATA(int thing);
+		uint16_t     LCD_ReadData(void);
 		
 #if defined(STM32GENERIC)||defined(ARDUINO_ARCH_HALMX_RTOS)||defined(STM32F107xC)
 		void	lcdOff();
@@ -237,6 +242,7 @@ class UTFT
 		void	setDisplayPage(byte page);
 		void	setWritePage(byte page);
 		void 	Blip(int numb);
+		
 #endif
 /*
 	The functions and variables below should not normally be used.
@@ -258,6 +264,7 @@ class UTFT
 
 		void LCD_Writ_Bus(int VH,int VL, byte mode);
 		void LCD_Write_COM(int VL);
+		//void LCD_Write_COM(uint8_t VL);
 		void LCD_Write_DATA(int VH,int VL);
 		void LCD_Write_DATA(int VL);
 		void LCD_Write_COM_DATA(int com1,int dat1);

@@ -29,7 +29,7 @@
  */
 #include "pins_arduino.h"
 #include "stm32f1xx_hal.h"
-
+#include "stdio.h"
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -75,12 +75,33 @@ const PinName digitalPin[] = {
   PB_1,  //D33 - LED
   PB_9,  //D34 - USB DISC
   PD_14,//D35 LCD Backlight
-  PD_15,//D36 LCD RS
+  PD_15,//D36 LCD RD
   PC_8,//D37 LCD CS
   PC_5,//D38 Touch input IRQ
   PD_11,//D39 SDCARD chip select 
   PD_15,//D40 LCD_RD
   PC_12,//D41 unknown yet
+  PE_0,//D42 Port E Bit 0
+  PE_1,//D43 Port E Bit 1
+  PE_2,//D44 Port E Bit 2
+  PE_3,//D45 Port E Bit 3
+  PE_4,//D46 Port E Bit 4
+  PE_5,//D47 Port E Bit 5
+  PE_6,//D48 Port E Bit 6
+  PD_13,//D49 LCD_RS
+  PC_9,//D50 TOUCH_CS
+  PE_7,//D51 Port E Bit 7
+  PC_10,//D52 
+  PC_11,//D53
+  PC_12,//D54
+  PC_13,//D55
+  PD_8,//D56
+  PD_9,//D57
+  PD_10,//D58
+  PD_11,//D59
+  PD_5,//D60
+  PD_6,//D61
+
   // Duplicated pins to avoid issue with analogRead
   // A0 have to be greater than NUM_ANALOG_INPUTS
   PB_0,  //D35/A0 = D3
@@ -122,7 +143,7 @@ extern "C" {
   * @retval None
   */
 
-#if defined(STM32F107xC) 
+#if defined(STM32F107xC) && defined(MKS_TFT)
 //extern HCD_HandleTypeDef hhcd_USB_OTG_FS;
 //extern TIM_HandleTypeDef htim2;
 //extern UART_HandleTypeDef huart3;
@@ -150,7 +171,25 @@ __disable_irq();
 //HAL_SuspendTick();
 */
 }
+void initVariant(void)
+{
 
+  GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+  __HAL_RCC_GPIOD_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOE, 0xffff, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOD, 0xffff, GPIO_PIN_RESET);
+  /*Configure GPIO pins : Pin1_Pin Pin2_Pin */
+  GPIO_InitStruct.Pin = 0xffff;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);	
+  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);	
+}
 void initVariant_old(void)
 {
 	
@@ -175,46 +214,8 @@ __HAL_DBGMCU_FREEZE_WWDG();
 //MX_GPIO_Init();
 }
 
-void WWDG_IRQHandler_exp(void)
-{
-   
-    //WWDG_ClearFlag();    /*Remove pre wakeup interrupt flag*/
-    __HAL_RCC_CLEAR_RESET_FLAGS(); 
-    
-    //LED1 = ~LED1;         /*LED state turnover */
-}
 
-void WWDG_IRQHandler(void)
-{
-  /* USER CODE BEGIN BusFault_IRQn 0 */
-
-  /* USER CODE END BusFault_IRQn 0 */
-  //while (1)
- // {
- // }
- WWDG_IRQHandler_exp();
-  /* USER CODE BEGIN BusFault_IRQn 1 */
-
-  /* USER CODE END BusFault_IRQn 1 */
-}
-void HardFault_Handler(void)
-{
-  __asm volatile (
-    " movs r0,#4       \n"
-    " movs r1, lr      \n"
-    " tst r0, r1       \n"
-    " beq _MSP         \n"
-    " mrs r0, psp      \n"
-    " b _HALT          \n"
-  "_MSP:               \n"
-    " mrs r0, msp      \n"
-  "_HALT:              \n"
-    " ldr r1,[r0,#20]  \n"
-    " bkpt #0          \n"
-  );
-}
-
-WEAK void SystemInit_B (void)
+WEAK void SystemInit_b (void)
 {
   /* Reset the RCC clock configuration to the default reset state(for debug purpose) */
   /* Set HSION bit */
@@ -414,54 +415,147 @@ tmp=0x4;
 
 void SystemClock_Config(void)
 {
-    // RCC_OscInitTypeDef RCC_OscInitStruct;
-    // RCC_ClkInitTypeDef RCC_ClkInitStruct;
-    // RCC_PeriphCLKInitTypeDef PeriphClkInit;
-    RCC_OscInitTypeDef RCC_OscInitStruct = {0};
-    RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-    RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
-
-
-    /** Initializes the CPU, AHB and APB busses clocks **/
+	WWDG->SR = 0;
+	
+    RCC_OscInitTypeDef RCC_OscInitStruct;
+    RCC_ClkInitTypeDef RCC_ClkInitStruct;
+#if defined(STM32F107xC) && defined(MKS_TFT)
+    RCC_PeriphCLKInitTypeDef PeriphClkInit;
+#endif
     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+#if defined(STM32F107xC) && defined(MKS_TFT)
     RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV5;
-    RCC_OscInitStruct.HSIState = RCC_HSI_ON;  // Added from STMCube
     RCC_OscInitStruct.Prediv1Source = RCC_PREDIV1_SOURCE_PLL2;
-    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE; 
-    RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL6; // Added from STMCube was RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
     RCC_OscInitStruct.PLL2.PLL2State = RCC_PLL2_ON;
     RCC_OscInitStruct.PLL2.PLL2MUL = RCC_PLL2_MUL8;
     RCC_OscInitStruct.PLL2.HSEPrediv2Value = RCC_HSE_PREDIV2_DIV5;
-    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK) // Added from STMCube
-    {
-      Error_Handler();
-    }
+#endif
+#if defined(STM32F103xE) && defined(CZMINI)
+    RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+#endif
+    RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+    RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+    RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+    if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+        Error_Handler();
 
-    /** Initializes the CPU, AHB and APB busses clocks **/
     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
             |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
     RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
     RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
-    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK) // Added from STMCube
-    {
-      Error_Handler();
-    }
+    if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+        Error_Handler();
+
+#if defined(STM32F107xC) && defined(MKS_TFT)
     PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_USB;
-    PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV2; // Added from STMCube was PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV3;
+    PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_PLL_DIV3;
     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
-    {
-      Error_Handler();
-    }
+        Error_Handler();
+#endif
 
-    //HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000); // Not in STMCube
-    //HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK); // Not in STMCube
+    HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+    HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+#if defined(STM32F107xC) && defined(MKS_TFT)
     __HAL_RCC_PLLI2S_ENABLE();
+#endif
+    HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);
+}
 
-    //HAL_NVIC_SetPriority(SysTick_IRQn, 15, 0);  // Not in STMCube
+
+
+void WWDG_IRQHandler(void)
+{
+  /* USER CODE BEGIN BusFault_IRQn 0 */
+
+  /* USER CODE END BusFault_IRQn 0 */
+  //while (1)
+ // {
+ // }
+__HAL_RCC_CLEAR_RESET_FLAGS(); 
+  /* USER CODE BEGIN BusFault_IRQn 1 */
+
+  /* USER CODE END BusFault_IRQn 1 */
+}
+
+#if defined(STM32F107xC) && defined(MKS_TFT)
+/**
+* @brief This function handles EXTI line0 interrupt.
+*/
+void WWDG_IRQHandler_exp(void)
+{
+   
+    //WWDG_ClearFlag();    /*Remove pre wakeup interrupt flag*/
+    __HAL_RCC_CLEAR_RESET_FLAGS(); 
+    
+    //LED1 = ~LED1;         /*LED state turnover */
+}
+void hard_fault_handler_c (unsigned int * hardfault_args)
+{
+unsigned int stacked_r0;
+  unsigned int stacked_r1;
+  unsigned int stacked_r2;
+  unsigned int stacked_r3;
+  unsigned int stacked_r12;
+  unsigned int stacked_lr;
+  unsigned int stacked_pc;
+  unsigned int stacked_psr;
+ 
+  stacked_r0 = ((unsigned long) hardfault_args[0]);
+  stacked_r1 = ((unsigned long) hardfault_args[1]);
+  stacked_r2 = ((unsigned long) hardfault_args[2]);
+  stacked_r3 = ((unsigned long) hardfault_args[3]);
+ 
+  stacked_r12 = ((unsigned long) hardfault_args[4]);
+  stacked_lr = ((unsigned long) hardfault_args[5]);
+  stacked_pc = ((unsigned long) hardfault_args[6]);
+  stacked_psr = ((unsigned long) hardfault_args[7]);
+  
+  printf ("\n\n[Hard fault handler - all numbers in hex]\r\n");
+  printf ("R0 = %x\r\n", stacked_r0);
+  printf ("R1 = %x\r\n", stacked_r1);
+  printf ("R2 = %x\r\n", stacked_r2);
+  printf ("R3 = %x\r\n", stacked_r3);
+  printf ("R12 = %x\r\n", stacked_r12);
+  printf ("LR [R14] = %x  subroutine call return address\r\n", stacked_lr);
+  printf ("PC [R15] = %x  program counter\r\n", stacked_pc);
+  printf ("PSR = %x\r\n", stacked_psr);
+  printf ("BFAR = %x\r\n", (*((volatile unsigned long *)(0xE000ED38))));
+  printf ("CFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED28))));
+  printf ("HFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED2C))));
+  printf ("DFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED30))));
+  printf ("AFSR = %x\r\n", (*((volatile unsigned long *)(0xE000ED3C))));
+  printf ("SCB_SHCSR = %x\r\n", SCB->SHCSR);
+  
+  while (1);
+}
+
+void HardFault_Handler(void)
+{
+	
+	__asm volatile (
+		"tst LR, #4       \n"
+		"ite EQ       \n"
+		"mrseq R0,MSP       \n"
+		"mrsne R0, PSP       \n"
+		"b hard_fault_handler_c \n"
+		);
+	
+  __asm volatile (
+    " movs r0,#4       \n"
+    " movs r1, lr      \n"
+    " tst r0, r1       \n"
+    " beq _MSP         \n"
+    " mrs r0, psp      \n"
+    " b _HALT          \n"
+  "_MSP:               \n"
+    " mrs r0, msp      \n"
+  "_HALT:              \n"
+    " ldr r1,[r0,#20]  \n"
+    " bkpt #0          \n"
+  );
 }
 
 
@@ -539,16 +633,11 @@ void TIM1_TRG_COM_IRQHandler(void)
 
   /* USER CODE END TIM2_IRQn 0 */
 
- // HAL_TIM_IRQHandler(&htim2);
+  //HAL_TIM_IRQHandler(&htim2);
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
   /* USER CODE END TIM2_IRQn 1 */
 }
-
-#if defined(STM32F107xC) && defined(MKS_TFT)
-/**
-* @brief This function handles EXTI line0 interrupt.
-*/
 
 void PendSV_Handler(void)
 {

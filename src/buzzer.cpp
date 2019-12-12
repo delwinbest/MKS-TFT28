@@ -1,9 +1,9 @@
 #include "buzzer.h"
 #include <Arduino.h>
 
-TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(SPEAKER), PinMap_PWM);
-uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(SPEAKER), PinMap_PWM));
-HardwareTimer *tim2 = new HardwareTimer(Instance);
+// TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(SPEAKER), PinMap_PWM);
+// uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(SPEAKER), PinMap_PWM));
+// HardwareTimer *tim2 = new HardwareTimer(Instance);
 
 void TIM_Callback(HardwareTimer*){
 
