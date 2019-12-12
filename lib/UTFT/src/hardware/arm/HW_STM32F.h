@@ -32,9 +32,38 @@ typedef struct
 	#endif
 
 
+
 void UTFT::_hw_special_init(void)
 {
  // STM_FSMC_LCD_Init();
+#if defined(STM32F107xC) 
+ GPIO_InitTypeDef GPIO_InitStruct;
+
+  /* GPIO Ports Clock Enable */
+  __HAL_RCC_GPIOE_CLK_ENABLE();
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOE, 0xffff, GPIO_PIN_RESET);
+
+  /*Configure GPIO pins : Pin1_Pin Pin2_Pin */
+  GPIO_InitStruct.Pin = 0xffff;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ // GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
+  pinMode(LCD_BACKLIGHT_PIN,OUTPUT); 
+  digitalWrite(LCD_BACKLIGHT_PIN,LOW);
+  pinMode(LCD_RS,OUTPUT);
+  pinMode(LCD_WR,OUTPUT);
+  pinMode(LCD_CS,OUTPUT);
+  pinMode(LCD_RD,OUTPUT);
+  digitalWrite(LCD_CS,LOW);
+  digitalWrite(LCD_RS,HIGH);
+  digitalWrite(LCD_WR,HIGH);
+  digitalWrite(LCD_RD,HIGH);
+    pinMode(LCD_BACKLIGHT_PIN,OUTPUT); 
+  digitalWrite(LCD_BACKLIGHT_PIN,HIGH);
+  #endif
 }
 
 #elif defined(ARDUINO_ARCH_MAPLE_STM32F1)||defined(ARDUINO_ARCH_MAPLE_STM32F4)
