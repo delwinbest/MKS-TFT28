@@ -224,6 +224,7 @@ void UTFT::InitLCD(byte orientation)
 {
 	orient=orientation;
 	_hw_special_init();
+
 	pinMode(__p1,OUTPUT);
 	pinMode(__p2,OUTPUT);
 	pinMode(__p3,OUTPUT);
@@ -664,6 +665,7 @@ void UTFT::fillScr(word color)
 	
 	ch=byte(color>>8);
 	cl=byte(color & 0xFF);
+
 	cbi(P_CS, B_CS);
 	clrXY();
 	if (display_transfer_mode!=1)
@@ -756,6 +758,7 @@ void UTFT::drawLine(int x1, int y1, int x2, int y2)
 		unsigned int	dy = (y2 > y1 ? y2 - y1 : y1 - y2);
 		short			ystep =  y2 > y1 ? 1 : -1;
 		int				col = x1, row = y1;
+
 		cbi(P_CS, B_CS);
 		if (dx < dy)
 		{
@@ -851,7 +854,6 @@ void UTFT::drawVLine(int x, int y, int l)
 	{
 		for (int i=0; i<l+1; i++)
 		{
-			
 			LCD_Write_DATA(fch, fcl);
 		}
 	}
@@ -938,6 +940,7 @@ void UTFT::printChar(byte c, int x, int y)
 			temp+=(cfont.x_size/8);
 		}
 	}
+
 	sbi(P_CS, B_CS);
 	clrXY();
 }
@@ -949,6 +952,7 @@ void UTFT::rotateChar(byte c, int x, int y, int pos, int deg)
 	int newx,newy;
 	double radian;
 	radian=deg*0.0175;  
+
 	cbi(P_CS, B_CS);
 
 	temp=((c-cfont.offset)*((cfont.x_size/8)*cfont.y_size))+4;

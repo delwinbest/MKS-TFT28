@@ -2,9 +2,9 @@
 #include <Arduino.h>
 #define BUZZER_Pin PA2
 
-// TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(SPEAKER), PinMap_PWM);
-// uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(SPEAKER), PinMap_PWM));
-// HardwareTimer *tim2 = new HardwareTimer(Instance);
+TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(BUZZER_Pin), PinMap_PWM);
+uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(BUZZER_Pin), PinMap_PWM));
+HardwareTimer *tim2 = new HardwareTimer(Instance);
 
 void TIM_Callback(HardwareTimer*){
 
@@ -14,8 +14,8 @@ void BUZZER_Init(void)
 {   
     Serial1.print("Init Buzzer...");
     // No need to configure pin, it will be done by HardwareTimer configuration
-    pinMode(SPEAKER, OUTPUT);
-    digitalWrite(SPEAKER,LOW);
+    pinMode(BUZZER_Pin, OUTPUT);
+    digitalWrite(BUZZER_Pin,LOW);
 
     // Automatically retrieve TIM instance and channel associated to pin
     // This is used to be compatible with all STM32 series automatically.
