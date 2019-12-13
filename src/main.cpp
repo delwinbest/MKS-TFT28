@@ -44,7 +44,7 @@ void setup() {
   myTouch.InitTouch();
   myTouch.setPrecision(PREC_MEDIUM);
   start_pwm_backlight();
-  BUZZER_ShortBeep();
+  // BUZZER_ShortBeep();
   
 }
 
