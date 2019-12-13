@@ -1,5 +1,5 @@
-#ifndef __tim_H
-#define __tim_H
+#ifndef __buzzer_H
+#define __buzzer_H
 
 extern "C" {
     void BUZZER_Init(void);
@@ -8,4 +8,4 @@ extern "C" {
 
 
 
-#endif /*__ tim_H */
+#endif /*__ buzzer_H */
