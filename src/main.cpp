@@ -1,5 +1,8 @@
+
 #include <Arduino.h>
 #include <UTFT.h>
+#include <memorysaver.h>
+#include <URTouch.h>
 #include "buzzer.h"
 
 #define WIDTH 319
@@ -8,21 +11,40 @@
 extern uint8_t SmallFont[];
 
 
-//UTFT lcdthingyname(byte model, int RS, int WR, int CS, int RST, int SER)
-UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,0);
+UTFT myGLCD(HX8558,LCD_RS,LCD_WR,LCD_CS,NOT_IN_USE,0);
+URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
+
+void start_pwm_backlight()
+{
+   TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(LCD_LED), PinMap_PWM);
+  uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(LCD_LED), PinMap_PWM));
 
 
+  // Instantiate HardwareTimer object. Thanks to 'new' instantiation, HardwareTimer is not destructed when setup() function is finished.
+  HardwareTimer *MyTim = new HardwareTimer(Instance);
+
+  // Configure and start PWM
+  MyTim->setPWM(channel, LCD_LED, 160, 50, NULL, NULL); // No callback required, we can simplify the function call
+  //MyTim->setPWM(channel, pin, 5, 1); // 5 Hertz, 10% dutycycle
+}
 
 void setup() {
   // put your setup code here, to run once:
-  Serial1.begin(115200);  //TX=PA9,RX=PA10
-  Serial1.println("Booting");
+  Serial.begin(115200);  //TX=PA9,RX=PA10
+  Serial.println("Booting");
   BUZZER_Init();
   randomSeed(analogRead(0));
   // Setup the LCD
-  myGLCD.Init();
+  myGLCD.InitLCD(PORTRAIT);
+  myGLCD.clrScr();
+  myGLCD.setColor(VGA_LIME);
   myGLCD.setFont(SmallFont);
-  BUZZER_ShortBeep();
+  myGLCD.setBackColor(0,0,0);
+  myGLCD.fillScr(VGA_BLACK);
+  myTouch.InitTouch();
+  myTouch.setPrecision(PREC_MEDIUM);
+  start_pwm_backlight();
+  // BUZZER_ShortBeep();
   
 }
 
@@ -48,10 +70,10 @@ void loop() {
   myGLCD.setColor(255, 255, 255);
   myGLCD.setBackColor(255, 0, 0);
   myGLCD.setFont(SmallFont);
-  myGLCD.printStr("* STM32 Color TFT Display Library *", CENTER, 1);
+  myGLCD.print("* STM32 Color TFT Display Library *", CENTER, 1);
   myGLCD.setBackColor(64, 64, 64);
   myGLCD.setColor(255,255,0);
-  myGLCD.printStr("<darkspr1te>", CENTER, 227);
+  myGLCD.print("<darkspr1te>", CENTER, 227);
 
   myGLCD.setColor(0, 0, 255);
   myGLCD.drawRect(0, 14, WIDTH-1, 225);
@@ -68,21 +90,21 @@ void loop() {
 
 // Draw sin-, cos- and tan-lines  
   myGLCD.setColor(0,255,255);
-  myGLCD.printStr("Sin", 5, 15);
+  myGLCD.print("Sin", 5, 15);
   for (int i=1; i<WIDTH-2; i++)
   {
     myGLCD.drawPixel(i,119+(sin(((i*1.13)*3.14)/180)*95));
   }
   
   myGLCD.setColor(255,0,0);
-  myGLCD.printStr("Cos", 5, 27);
+  myGLCD.print("Cos", 5, 27);
   for (int i=1; i<WIDTH-2; i++)
   {
     myGLCD.drawPixel(i,119+(cos(((i*1.13)*3.14)/180)*95));
   }
 
   myGLCD.setColor(255,255,0);
-  myGLCD.printStr("Tan", 5, 39);
+  myGLCD.print("Tan", 5, 39);
   for (int i=1; i<WIDTH-2; i++)
   {
     myGLCD.drawPixel(i,119+(tan(((i*1.13)*3.14)/180)));
@@ -123,5 +145,5 @@ void loop() {
   myGLCD.setColor(0,0,0);
   myGLCD.fillRect(1,15,WIDTH-2,224);
 
-
+  Serial.println("loop");
 }
