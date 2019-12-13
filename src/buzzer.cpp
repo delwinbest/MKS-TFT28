@@ -1,5 +1,6 @@
 #include "buzzer.h"
 #include <Arduino.h>
+#define BUZZER_Pin PA2
 
 // TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(SPEAKER), PinMap_PWM);
 // uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(SPEAKER), PinMap_PWM));
@@ -25,20 +26,23 @@ void BUZZER_Init(void)
     // tim2->setOverflow(5000, HERTZ_FORMAT); // 10000 microseconds = 10 milliseconds
 
 
+
     // tim2->attachInterrupt(TIM_Callback);
     // tim2->attachInterrupt(channel, TIM_Callback);
     
     // tim2->pause();
     Serial1.print("DONE");
+    //tim2->setPWM(channel, SPEAKER, 0, 0, NULL, NULL);
 }
 
 void BUZZER_ShortBeep()
 {
 	Serial1.print("beep");
-    // tim2->resume();
-    digitalWrite(SPEAKER,HIGH);
+  // tim2->resume();
+  digitalWrite(BUZZER_Pin,HIGH);
 	delay(500);
 	// tim2->pause();  
-    digitalWrite(SPEAKER,LOW);
+  digitalWrite(BUZZER_Pin,LOW);
+
 }
 
