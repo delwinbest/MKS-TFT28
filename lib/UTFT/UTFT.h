@@ -133,6 +133,7 @@
 #define SERIAL_5PIN		5
 #define LATCHED_16		17
 
+
 #define NOTINUSE		255
 
 //*********************************
@@ -238,6 +239,18 @@ class UTFT
 		regsize			B_RS, B_WR, B_CS, B_RST, B_SDA, B_SCL, B_ALE;
 		byte			__p1, __p2, __p3, __p4, __p5;
 		_current_font	cfont;
+<<<<<<< HEAD:lib/UTFT/src/UTFT.h
+		boolean			_transparent;
+
+		void LCD_Writ_Bus(int VH,int VL, byte mode);
+		void LCD_Write_COM(int VL);
+		//void LCD_Write_COM(uint8_t VL);
+		void LCD_Write_DATA(int VH,int VL);
+		void LCD_Write_DATA(int VL);
+		void LCD_Write_COM_DATA(int com1,int dat1);
+		void _hw_special_init(void);
+		void setPixel(uint16_t color);
+=======
 		bool 			_transparent;
 
 		void LCD_Writ_Bus(char VH,char VL, byte mode);
@@ -249,6 +262,7 @@ class UTFT
 		void LCD_Write_DATA_8(char VL);		
 		void _hw_special_init();
 		void setPixel(word color);
+>>>>>>> pull_reqs/darkspr1te_lcd:lib/UTFT/UTFT.h
 		void drawHLine(int x, int y, int l);
 		void drawVLine(int x, int y, int l);
 		void printChar(byte c, int x, int y);

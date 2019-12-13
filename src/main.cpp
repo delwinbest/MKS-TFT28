@@ -19,6 +19,12 @@ void start_pwm_backlight()
    TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(LCD_LED), PinMap_PWM);
   uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(LCD_LED), PinMap_PWM));
 
+#define X_RES 320
+#define Y_RES 240
+#define pin LCD_LED
+#define dlay  8
+#define freq 60
+#define gamma_start 45
 
   // Instantiate HardwareTimer object. Thanks to 'new' instantiation, HardwareTimer is not destructed when setup() function is finished.
   HardwareTimer *MyTim = new HardwareTimer(Instance);
@@ -33,7 +39,6 @@ void setup() {
   Serial.begin(115200);  //TX=PA9,RX=PA10
   Serial.println("Booting");
   BUZZER_Init();
-  randomSeed(analogRead(0));
   // Setup the LCD
   myGLCD.InitLCD(PORTRAIT);
   myGLCD.clrScr();
@@ -49,19 +54,6 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
-  // digitalWrite(SPEAKER, HIGH);   // turn the SPEAKER on (HIGH is the voltage level)
-  // delay(1000);                       // wait for a second
-  // digitalWrite(SPEAKER, LOW);    // turn the SPEAKER off by making the voltage LOW
-  // delay(1000); 
-
-  int buf[WIDTH-2];
-  int x, x2;
-  int y, y2;
-  int r;
-
-// Clear the screen and draw the frame
-  myGLCD.clrScr();
 
   myGLCD.setColor(255, 0, 0);
   myGLCD.fillRect(0, 0, WIDTH-1, 13);

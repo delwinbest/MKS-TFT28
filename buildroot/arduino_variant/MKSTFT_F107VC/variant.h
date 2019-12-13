@@ -80,6 +80,33 @@ extern "C" {
 #define PB9  34 // USB DISC
 #define PD14 35//LCD_LED
 #define PD15 36//LCD RD
+<<<<<<< HEAD
+#define PC8 37//LCD CS
+#define PC5 38//Touch IRQ
+#define PD11 39 //SDCARD Chip Select
+#define PD15 40//LCD_RD 
+#define PC12 41//unknown yet
+#define PE0 42
+#define PE1 43
+#define PE2 44
+#define PE3 45
+#define PE4 46
+#define PE5 47
+#define PE6 48
+#define PD13 49 //LCD_RS
+#define PC9 50//TOUCH_CS
+#define PE7 51//PE7
+#define PC10 52
+#define PC11 53
+#define PC12 54
+#define PC13 55
+#define PD8 56
+#define PD9 57
+#define PD10 58
+#define PD11 59
+#define PD5 60
+#define PD6 61
+=======
 #define PC8  37//LCD CS
 #define PC5  38//Touch IRQ
 #define PD11 39 //SDCARD Chip Select
@@ -105,6 +132,7 @@ extern "C" {
 #define PD6 57
 
 #define NUM_DIGITAL_PINS        66 //dont forget to update this when adding new pins to pinarray darkspr1te- segfault hey 
+>>>>>>> pull_reqs/darkspr1te_lcd
 
 
 #define TOUCH_SCK PC10
@@ -129,11 +157,19 @@ extern "C" {
 #define POWER_Pin POWER
 #define EEPROM_CS PIN_SPI2_SS
 
+<<<<<<< HEAD
+#define SERIALRX2 PD8 //uart 3 alt config
+#define SERIALTX2 PD9//uart 3 alt config
+
+// This must be a literal
+#define NUM_DIGITAL_PINS        62 //dont forget to update this when adding new pins to pinarray darkspr1te- segfault hey 
+=======
 //#define SERIALRX2 PD8 //uart 3 alt config
 //#define SERIALTX2 PD9//uart 3 alt config
 
 // This must be a literal
 
+>>>>>>> pull_reqs/darkspr1te_lcd
 // This must be a literal with a value less than or equal to to MAX_ANALOG_INPUTS
 #define NUM_ANALOG_INPUTS       9
 #define NUM_ANALOG_FIRST        58
@@ -184,14 +220,37 @@ extern "C" {
 // Mandatory for Firmata
 #define PIN_SERIAL_RX           PA10//def usart1 wifi rx labels are correct for tx/rx
 #define PIN_SERIAL_TX           PA9//def usart1 wifi tx 
+<<<<<<< HEAD
 
 #define PIN_SERIAL2_RX           PD6//uart2 connect to AUX-1 //PA3//PA3//
 #define PIN_SERIAL2_TX           PD5//uart2 connect to AUX-1 //PA2//PA2 speaker
 
+=======
+
+#define PIN_SERIAL2_RX           PD6//uart2 connect to AUX-1 //PA3//PA3//
+#define PIN_SERIAL2_TX           PD5//uart2 connect to AUX-1 //PA2//PA2 speaker
+
+>>>>>>> pull_reqs/darkspr1te_lcd
 #define PIN_SERIAL3_TX           PD8 //PB10 //wifi txd // uart 3 default config PD9 label on board are swapped for tx/rx 
 #define PIN_SERIAL3_RX           PD9 //PB11 //wifi rxd //uart 3 defualt config 
 // USB
 #define USB_DISC_PIN            PB9
+<<<<<<< HEAD
+
+//#define MAIN_PR_OFFSET 0x8000
+//#define HSE_VALUE               25000000U /*!< Default value of the External oscillator in Hz.*/
+//#define VECT_TAB_SRAM 1
+/*
+VECT_TAB_OFFSET
+VECT_TAB_SRAM
+  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. 
+#else
+  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. *
+#endif
+
+*/
+ //#define VECT_TAB_SRAM
+=======
 /*
 USB_OTG_FS_SOF = PA_8,
 USB_OTG_FS_VBUS = PA_9,
@@ -200,6 +259,7 @@ USB_OTG_FS_DM = PA_11,
 USB_OTG_FS_DP = PA_12,
 */
 
+>>>>>>> pull_reqs/darkspr1te_lcd
  #define SPEAKER_Pin             GPIO_PIN_2
  #define SPEAKER_GPIO_Port       GPIOA
  #define FILAMENT_DI_Pin         GPIO_PIN_0
