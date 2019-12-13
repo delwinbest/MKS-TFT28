@@ -19,8 +19,6 @@ void start_pwm_backlight()
 {
   TIM_TypeDef *Instance = (TIM_TypeDef *)pinmap_peripheral(digitalPinToPinName(LCD_LED), PinMap_PWM);
   uint32_t channel = STM_PIN_CHANNEL(pinmap_function(digitalPinToPinName(LCD_LED), PinMap_PWM));
-
-
   // Instantiate HardwareTimer object. Thanks to 'new' instantiation, HardwareTimer is not destructed when setup() function is finished.
   HardwareTimer *MyTim = new HardwareTimer(Instance);
 
@@ -29,29 +27,30 @@ void start_pwm_backlight()
   //MyTim->setPWM(channel, pin, 5, 1); // 5 Hertz, 10% dutycycle
 }
 
-String  get_regs(int regs, int reads)
+String  get_lcd_registers(int reg_address, int size_of_reg)
 {
-  String we_return="";
-  myGLCD.h_write_COM(regs);
-  int data = myGLCD.h_read_DATA();//first two bytes dummy
-  we_return = we_return+String((data&0xff),HEX);
-   for (int xr=0;xr<reads;xr++)
+  String return_string;
+  int data;
+  myGLCD.h_write_COM(reg_address);
+  data = myGLCD.h_read_DATA();//first two bytes dummy
+  return_string = return_string+String((data&0xff),HEX);
+  for (int xr=0;xr<size_of_reg;xr++)
   {
-   data = myGLCD.h_read_DATA();
-  we_return = we_return+String(data,HEX); 
+    data = myGLCD.h_read_DATA();
+    return_string = return_string+String(data,HEX); 
   }
-  return we_return;
+  return return_string;
 }
 
 
-void print_regs_lcd()
+void lcdprint_lcd_registers()
 {
  String thisstring;
   myGLCD.setFont(SmallFont);
 
   
   myGLCD.fillScr(BLACK);
-  myGLCD.printStr("lcd man/mdl:", 1, 1,0);myGLCD.printStr(get_regs(0x04,2),95, 1,0);
+  myGLCD.printStr("lcd man/mdl:", 1, 1,0);myGLCD.printStr(get_lcd_registers(0x04,2),95, 1,0);
 
   myGLCD.printStr("Reg 0x09",1,15,0);
   myGLCD.printStr("Reg 0x0A",1,25,0);
@@ -62,16 +61,16 @@ void print_regs_lcd()
   myGLCD.printStr("Reg 0x0F",1,75,0);
 
 
-  myGLCD.printStr(get_regs(0x09,2),75, 15,0);
-  myGLCD.printStr(get_regs(0x0A,2),75, 25,0);
-  myGLCD.printStr(get_regs(0x0B,2),75, 35,0);
-  myGLCD.printStr(get_regs(0x0C,2),75, 45,0);
-  myGLCD.printStr(get_regs(0x0D,2),75, 55,0);
-  myGLCD.printStr(get_regs(0x0E,2),75, 65,0);
-  myGLCD.printStr(get_regs(0x0F,1),75, 75,0);
+  myGLCD.printStr(get_lcd_registers(0x09,2),75, 15,0);
+  myGLCD.printStr(get_lcd_registers(0x0A,2),75, 25,0);
+  myGLCD.printStr(get_lcd_registers(0x0B,2),75, 35,0);
+  myGLCD.printStr(get_lcd_registers(0x0C,2),75, 45,0);
+  myGLCD.printStr(get_lcd_registers(0x0D,2),75, 55,0);
+  myGLCD.printStr(get_lcd_registers(0x0E,2),75, 65,0);
+  myGLCD.printStr(get_lcd_registers(0x0F,1),75, 75,0);
 }
 
-void print_regs(int regs,int reads)
+void print_regs_serial(int regs,int reads)
 {
   myGLCD.h_write_COM(regs);
   Serial.print("Reg: 0x");
@@ -88,7 +87,7 @@ void print_regs(int regs,int reads)
   Serial.println();
 }
 
-void do_regs()
+void serialprint_lcd_registers()
 {
    //Automated read lcd id
   Serial.print("LCD ID:");
@@ -96,16 +95,16 @@ void do_regs()
   Serial.println("Reading registers:-");
   Serial.println();
   //Manual way 
-  print_regs(0x04,4);//print lcd ID
-  print_regs(0x09,4);//Read Display Status 4 words(reads)
+  print_regs_serial(0x04,4);//print lcd ID
+  print_regs_serial(0x09,4);//Read Display Status 4 words(reads)
   //print_regs(0x09,4);//Read Display Status 4 words(reads)
   Serial.print("Register 0x4 {ID} as a string :0x");
-  Serial.println(get_regs(0x04,2));
-  print_regs(0x0a,1);//Read Display power mode
-  print_regs(0x0b,1);//Read Display  MADCTL
-  print_regs(0x0c,1);//Read Display Pixel format
-  print_regs(0x0d,1);//Read Display Image Mode
-  print_regs(0x0e,1);//Read Display Signal Mode 
-  print_regs(0x0f,1);//Read Display Self Diag result 
-  print_regs(0xd0,4);//Read Display Self Diag result 
+  Serial.println(get_lcd_registers(0x04,2));
+  print_regs_serial(0x0a,1);//Read Display power mode
+  print_regs_serial(0x0b,1);//Read Display  MADCTL
+  print_regs_serial(0x0c,1);//Read Display Pixel format
+  print_regs_serial(0x0d,1);//Read Display Image Mode
+  print_regs_serial(0x0e,1);//Read Display Signal Mode 
+  print_regs_serial(0x0f,1);//Read Display Self Diag result 
+  print_regs_serial(0xd0,4);//Read Display Self Diag result 
 }

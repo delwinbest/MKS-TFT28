@@ -20,8 +20,8 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   delay(1000);
-  do_regs();
-  print_regs_lcd();
+  serialprint_lcd_registers();
+  lcdprint_lcd_registers();
 
   Serial.println("loop");
 }
