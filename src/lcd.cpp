@@ -10,9 +10,12 @@ void start_lcd(){
   myGLCD.Init(PORTRAIT);
   myGLCD.clrScr();
   myGLCD.setBackColor(0,0,0);
+  myGLCD.setFont(SmallFont);
+  myGLCD.fillScr(BLACK);
   myTouch.InitTouch();
   myTouch.setPrecision(PREC_MEDIUM);
   start_pwm_backlight();
+  delay(500);
 }
 
 void start_pwm_backlight()
@@ -42,32 +45,32 @@ String  get_lcd_registers(int reg_address, int size_of_reg)
   return return_string;
 }
 
+void lcdprint_string(String string, int x, int y, int deg) {
+  myGLCD.printStr(string,x,y,deg);
+}
 
-void lcdprint_lcd_registers()
-{
- String thisstring;
+void lcd_console_log(String string, int &consoleLine){
   myGLCD.setFont(SmallFont);
-
-  
-  myGLCD.fillScr(BLACK);
-  myGLCD.printStr("lcd man/mdl:", 1, 1,0);myGLCD.printStr(get_lcd_registers(0x04,2),95, 1,0);
-
-  myGLCD.printStr("Reg 0x09",1,15,0);
-  myGLCD.printStr("Reg 0x0A",1,25,0);
-  myGLCD.printStr("Reg 0x0B",1,35,0);
-  myGLCD.printStr("Reg 0x0C",1,45,0);
-  myGLCD.printStr("Reg 0x0D",1,55,0);
-  myGLCD.printStr("Reg 0x0E",1,65,0);
-  myGLCD.printStr("Reg 0x0F",1,75,0);
+  if(consoleLine == 1) { myGLCD.clrScr(); }
+  lcdprint_string(string, 1, consoleLine, 0);
+  if( consoleLine > 230) {
+    consoleLine = 1;
+  } else {
+    consoleLine = consoleLine+10;
+  }
+}
 
 
-  myGLCD.printStr(get_lcd_registers(0x09,2),75, 15,0);
-  myGLCD.printStr(get_lcd_registers(0x0A,2),75, 25,0);
-  myGLCD.printStr(get_lcd_registers(0x0B,2),75, 35,0);
-  myGLCD.printStr(get_lcd_registers(0x0C,2),75, 45,0);
-  myGLCD.printStr(get_lcd_registers(0x0D,2),75, 55,0);
-  myGLCD.printStr(get_lcd_registers(0x0E,2),75, 65,0);
-  myGLCD.printStr(get_lcd_registers(0x0F,1),75, 75,0);
+void lcdprint_lcd_registers(int &consoleLine)
+{
+  lcd_console_log("lcd man/mdl:" + get_lcd_registers(0x04,2), consoleLine);
+  lcd_console_log("Reg 0x09:" + get_lcd_registers(0x09,2), consoleLine);
+  lcd_console_log("Reg 0x0A:" + get_lcd_registers(0x0A,2), consoleLine);
+  lcd_console_log("Reg 0x0B:" + get_lcd_registers(0x0B,2), consoleLine);
+  lcd_console_log("Reg 0x0C:" + get_lcd_registers(0x0C,2), consoleLine);
+  lcd_console_log("Reg 0x0D:" + get_lcd_registers(0x0D,2), consoleLine);
+  lcd_console_log("Reg 0x0E:" + get_lcd_registers(0x0E,2), consoleLine);
+  lcd_console_log("Reg 0x0F:" + get_lcd_registers(0x0F,1), consoleLine);
 }
 
 void print_regs_serial(int regs,int reads)
