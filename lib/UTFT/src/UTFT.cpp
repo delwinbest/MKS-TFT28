@@ -205,10 +205,10 @@ int  UTFT::readID(void)
 	LCD_Write_COM(0x4);
     LCD_delay_ms(50); // delay 50 ms
     //first BYTE  is dummy  	
-	int first_read =LCD_ReadData();
-	int second_read =LCD_ReadData();
+	int lcd_return =LCD_ReadData();
+	lcd_return =LCD_ReadData();
 #endif
-   return 	(uint16_t)(second_read);
+   return 	(uint16_t)(lcd_return);
 }			  
 
 void UTFT::Init(byte orientation)
@@ -736,7 +736,6 @@ void UTFT::fillScr(byte r, byte g, byte b)
 
 void UTFT::fillScr(uint16_t color)
 {
-	long i;
 	char ch, cl;
 	
 	ch=byte(color>>8);

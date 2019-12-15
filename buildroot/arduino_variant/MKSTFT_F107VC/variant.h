@@ -44,15 +44,15 @@ extern "C" {
 #define PB11 0
 #define PB10 1
 #define PB2  2
-#define PB0  3  // A0
-#define PA7  4  // A1
-#define PA6  5  // A2
-#define PA5  6  // A3
-#define PA4  7  // A4
-#define PA3  8  // A5
-#define PA2  9  // A6
-#define PA1  10 // A7
-#define PA0  11 // A8
+#define PB0  3    // A0
+#define PA7  4    // A1
+#define PA6  5    // A2
+#define PA5  6    // A3
+#define PA4  7    // A4
+#define PA3  8    // A5
+#define PA2  9    // A6
+#define PA1  10   // A7
+#define PA0  11   // A8
 #define PC15 12
 #define PC14 13
 #define PC13 14
@@ -63,10 +63,10 @@ extern "C" {
 #define PB4  18
 #define PB3  19
 #define PA15 20
-#define PA14 21 // SWCLK
-#define PA13 22 // SWDI0
-#define PA12 23 // USB DP
-#define PA11 24 // USB DM
+#define PA14 21   // SWCLK
+#define PA13 22   // SWDI0
+#define PA12 23   // USB DP
+#define PA11 24   // USB DM
 #define PA10 25
 #define PA9  26
 #define PA8  27
@@ -75,17 +75,18 @@ extern "C" {
 #define PB13 30
 #define PB12 31
 // Other
-#define PB8  32 //  - User buttons
-#define PB1  33 // LED
-#define PB9  34 // USB DISC
+#define PB8  32   //  - User buttons
+#define PB1  33   // LED
+#define PB9  34   // USB DISC
 
-#define PD14 35//LCD_LED
-#define PD15 36//LCD RD
-#define PC8 37//LCD CS
-#define PC5 38//Touch IRQ
-#define PD11 39 //SDCARD Chip Select
-#define PD15 40//LCD_RD 
-#define PC12 41//unknown yet
+// Many dupes here, comenting out one of them until cleaned up
+#define PD14 35   //LCD_LED
+#define PD15 36   //LCD RD
+#define PC8 37    //LCD CS
+#define PC5 38    //Touch IRQ
+#define PD11 39    //SDCARD Chip Select
+//#define PD15 40   //LCD_RD 
+#define PC12 41   //unknown yet
 #define PE0 42
 #define PE1 43
 #define PE2 44
@@ -98,12 +99,12 @@ extern "C" {
 #define PE7 51//PE7
 #define PC10 52
 #define PC11 53
-#define PC12 54
-#define PC13 55
+//#define PC12 54
+//#define PC13 55
 #define PD8 56
 #define PD9 57
 #define PD10 58
-#define PD11 59
+//#define PD11 59
 #define PD5 60
 #define PD6 61
 

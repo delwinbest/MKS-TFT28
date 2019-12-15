@@ -4,9 +4,11 @@
 #include "helperfunctions.h"
 #include "UTFT.h"
 #include "URTouch.h"
-#include "sdcard.h"
+#include <SPI.h>
+
 
 LCD lcd;
+
 
 void setup() {
   // put your setup code here, to run once:
@@ -19,6 +21,8 @@ void setup() {
   lcd.lcd_console_log("LCD Register Read Test...");
   // serialprint_lcd_registers();
   lcd.lcdprint_lcd_registers();
+  //Start SD Card
+
   delay(1000);
   // BUZZER_ShortBeep();
   lcd.consoleLine = 1;
