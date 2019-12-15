@@ -4,8 +4,12 @@
 #include "helperfunctions.h"
 #include "UTFT.h"
 #include "URTouch.h"
+//#include <STM32SD.h>
 
-int consoleLine = 1;
+LCD lcd;
+
+//Sd2Card card;
+//SdFatFs fatFs;
 
 void setup() {
   // put your setup code here, to run once:
@@ -13,20 +17,22 @@ void setup() {
   Serial.println("Booting");
   BUZZER_Init();
   // Setup the LCD
-  start_lcd();
-  lcd_console_log("Booting...", consoleLine);
-  lcd_console_log("LCD Register Read Test...", consoleLine);
+  lcd.start_lcd();
+  lcd.lcd_console_log("Booting...");
+  lcd.lcd_console_log("LCD Register Read Test...");
   // serialprint_lcd_registers();
-  lcdprint_lcd_registers(consoleLine);
+  lcd.lcdprint_lcd_registers();
+  //Start SD Card
+
   delay(1000);
   // BUZZER_ShortBeep();
-  consoleLine = 1;
+  lcd.consoleLine = 1;
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   delay(1000);
-  lcd_console_log("Line #" + String(consoleLine), consoleLine);
+  lcd.lcd_console_log("Line #" + String(lcd.consoleLine));
 
   Serial.println("loop");
 }
