@@ -44,15 +44,15 @@ extern "C" {
 #define PB11 0
 #define PB10 1
 #define PB2  2
-#define PB0  3    // A0
-#define PA7  4    // A1
-#define PA6  5    // A2
-#define PA5  6    // A3
-#define PA4  7    // A4
-#define PA3  8    // A5
-#define PA2  9    // A6
-#define PA1  10   // A7
-#define PA0  11   // A8
+#define PB0  3  // A0
+#define PA7  4  // A1
+#define PA6  5  // A2
+#define PA5  6  // A3
+#define PA4  7  // A4
+#define PA3  8  // A5
+#define PA2  9  // A6
+#define PA1  10 // A7
+#define PA0  11 // A8
 #define PC15 12
 #define PC14 13
 #define PC13 14
@@ -63,10 +63,10 @@ extern "C" {
 #define PB4  18
 #define PB3  19
 #define PA15 20
-#define PA14 21   // SWCLK
-#define PA13 22   // SWDI0
-#define PA12 23   // USB DP
-#define PA11 24   // USB DM
+#define PA14 21 // SWCLK
+#define PA13 22 // SWDI0
+#define PA12 23 // USB DP
+#define PA11 24 // USB DM
 #define PA10 25
 #define PA9  26
 #define PA8  27
@@ -75,38 +75,36 @@ extern "C" {
 #define PB13 30
 #define PB12 31
 // Other
-#define PB8  32   //  - User buttons
-#define PB1  33   // LED
-#define PB9  34   // USB DISC
-
-// Many dupes here, comenting out one of them until cleaned up
-#define PD14 35   //LCD_LED
-#define PD15 36   //LCD RD
-#define PC8 37    //LCD CS
-#define PC5 38    //Touch IRQ
-#define PD11 39    //SDCARD Chip Select
-//#define PD15 40   //LCD_RD 
-#define PC12 41   //unknown yet
-#define PE0 42
-#define PE1 43
-#define PE2 44
-#define PE3 45
-#define PE4 46
-#define PE5 47
-#define PE6 48
+#define PB8  32 //  - User buttons
+#define PB1  33 // LED
+#define PB9  34 // USB DISC
+#define PD14 35//LCD_LED
+#define PD15 36//LCD RD
+#define PC8  37//LCD CS
+#define PC5  38//Touch IRQ
+#define PD11 39 //SDCARD Chip Select
+ 
+#define PC12 40//unknown yet
+#define PE0  41
+#define PE1  42
+#define PE2  43
+#define PE3  44
+#define PE4  45
+#define PE5  46
+#define PE6  47
+#define PE7  48//PE7
 #define PD13 49 //LCD_RS
-#define PC9 50//TOUCH_CS
-#define PE7 51//PE7
-#define PC10 52
-#define PC11 53
-//#define PC12 54
-//#define PC13 55
-#define PD8 56
-#define PD9 57
-#define PD10 58
-//#define PD11 59
-#define PD5 60
-#define PD6 61
+#define PC9  50//TOUCH_CS
+
+#define PC10 51
+#define PC11 52
+#define PD8 53
+#define PD9 54
+#define PD10 55
+#define PD5 56
+#define PD6 57
+
+#define NUM_DIGITAL_PINS        66 //dont forget to update this when adding new pins to pinarray darkspr1te- segfault hey 
 
 
 #define TOUCH_SCK PC10
@@ -131,14 +129,14 @@ extern "C" {
 #define POWER_Pin POWER
 #define EEPROM_CS PIN_SPI2_SS
 
-#define SERIALRX2 PD8 //uart 3 alt config
-#define SERIALTX2 PD9//uart 3 alt config
+//#define SERIALRX2 PD8 //uart 3 alt config
+//#define SERIALTX2 PD9//uart 3 alt config
 
 // This must be a literal
-#define NUM_DIGITAL_PINS        62 //dont forget to update this when adding new pins to pinarray darkspr1te- segfault hey 
+
 // This must be a literal with a value less than or equal to to MAX_ANALOG_INPUTS
 #define NUM_ANALOG_INPUTS       9
-#define NUM_ANALOG_FIRST        35
+#define NUM_ANALOG_FIRST        58
 
 // On-board LED pin number
 #define LED_BUILTIN             PD14
@@ -194,20 +192,14 @@ extern "C" {
 #define PIN_SERIAL3_RX           PD9 //PB11 //wifi rxd //uart 3 defualt config 
 // USB
 #define USB_DISC_PIN            PB9
-
-//#define MAIN_PR_OFFSET 0x8000
-//#define HSE_VALUE               25000000U /*!< Default value of the External oscillator in Hz.*/
-//#define VECT_TAB_SRAM 1
 /*
-VECT_TAB_OFFSET
-VECT_TAB_SRAM
-  SCB->VTOR = SRAM_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal SRAM. 
-#else
-  SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH. *
-#endif
-
+USB_OTG_FS_SOF = PA_8,
+USB_OTG_FS_VBUS = PA_9,
+USB_OTG_FS_ID = PA_10,
+USB_OTG_FS_DM = PA_11,
+USB_OTG_FS_DP = PA_12,
 */
- //#define VECT_TAB_SRAM
+
  #define SPEAKER_Pin             GPIO_PIN_2
  #define SPEAKER_GPIO_Port       GPIOA
  #define FILAMENT_DI_Pin         GPIO_PIN_0
