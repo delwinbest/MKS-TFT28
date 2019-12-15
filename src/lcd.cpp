@@ -1,10 +1,9 @@
 #include <Arduino.h>
 #include "lcd.h"
 #include "UTFT.h"
-#include "URTouch.h"
 
 UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,LCD_RD,LANDSCAPE);
-URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
+
 
 void LCD::start_lcd(){
   myGLCD.Init(PORTRAIT);
@@ -12,8 +11,6 @@ void LCD::start_lcd(){
   myGLCD.setBackColor(0,0,0);
   myGLCD.setFont(SmallFont);
   myGLCD.fillScr(BLACK);
-  myTouch.InitTouch();
-  myTouch.setPrecision(PREC_MEDIUM);
   start_pwm_backlight();
   delay(500);
 }

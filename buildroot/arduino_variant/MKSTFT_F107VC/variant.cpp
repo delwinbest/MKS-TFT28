@@ -79,40 +79,36 @@ const PinName digitalPin[] = {
   PC_8,//D37 LCD CS
   PC_5,//D38 Touch input IRQ
   PD_11,//D39 SDCARD chip select 
-  PD_15,//D40 LCD_RD
-  PC_12,//D41 unknown yet
-  PE_0,//D42 Port E Bit 0
-  PE_1,//D43 Port E Bit 1
-  PE_2,//D44 Port E Bit 2
-  PE_3,//D45 Port E Bit 3
-  PE_4,//D46 Port E Bit 4
-  PE_5,//D47 Port E Bit 5
-  PE_6,//D48 Port E Bit 6
+  PC_12,//D40 unknown yet
+  PE_0,//D41 Port E Bit 0
+  PE_1,//D42 Port E Bit 1
+  PE_2,//D43 Port E Bit 2
+  PE_3,//D44 Port E Bit 3
+  PE_4,//D45 Port E Bit 4
+  PE_5,//D46 Port E Bit 5
+  PE_6,//D47 Port E Bit 6
+  PE_7,//D48 Port E Bit 7
   PD_13,//D49 LCD_RS
   PC_9,//D50 TOUCH_CS
-  PE_7,//D51 Port E Bit 7
-  PC_10,//D52 
-  PC_11,//D53
-  PC_12,//D54
-  PC_13,//D55
-  PD_8,//D56
-  PD_9,//D57
-  PD_10,//D58
-  PD_11,//D59
-  PD_5,//D60
-  PD_6,//D61
+  PC_10,//D51 
+  PC_11,//D52
+  PD_8,//D53
+  PD_9,//D54
+  PD_10,//D55
+  PD_5,//D56
+  PD_6,//D57
 
   // Duplicated pins to avoid issue with analogRead
   // A0 have to be greater than NUM_ANALOG_INPUTS
-  PB_0,  //D35/A0 = D3
-  PA_7,  //D36/A1 = D4
-  PA_6,  //D37/A2 = D5
-  PA_5,  //D38/A3 = D6
-  PA_4,  //D39/A4 = D7
-  PA_3,  //D40/A5 = D8
-  PA_2,  //D41/A6 = D9
-  PA_1,  //D42/A7 = D10
-  PA_0   //D43/A8 = D11
+  PB_0,  //D58/A0 = D3
+  PA_7,  //D59/A1 = D4
+  PA_6,  //D60/A2 = D5
+  PA_5,  //D61/A3 = D6
+  PA_4,  //D62/A4 = D7
+  PA_3,  //D63/A5 = D8
+  PA_2,  //D64/A6 = D9
+  PA_1,  //D65/A7 = D10
+  PA_0   //D66/A8 = D11
 };
 
 #ifdef __cplusplus
@@ -490,6 +486,7 @@ void WWDG_IRQHandler_exp(void)
     
     //LED1 = ~LED1;         /*LED state turnover */
 }
+
 void hard_fault_handler_c (unsigned int * hardfault_args)
 {
 unsigned int stacked_r0;
@@ -557,6 +554,7 @@ void HardFault_Handler(void)
 }
 
 
+#if defined(VECTOR)
 void NMI_Handler(void)
 {
   /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
@@ -580,7 +578,7 @@ void MemManage_Handler(void)
   /* USER CODE END MemoryManagement_IRQn 1 */
 }
 
-void BusFault_Handler(void)
+ void BusFault_Handler(void)
 {
   /* USER CODE BEGIN BusFault_IRQn 0 */
 
@@ -723,6 +721,7 @@ void OTG_FS_IRQHandler(void)
 
   /* USER CODE END OTG_FS_IRQn 1 */
 }
+#endif
 #endif
 #ifdef __cplusplus
 }
