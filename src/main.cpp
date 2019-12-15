@@ -4,11 +4,12 @@
 #include "helperfunctions.h"
 #include "UTFT.h"
 #include "URTouch.h"
-#include <SPI.h>
-
+//#include <STM32SD.h>
 
 LCD lcd;
 
+//Sd2Card card;
+//SdFatFs fatFs;
 
 void setup() {
   // put your setup code here, to run once:
