@@ -1,6 +1,4 @@
-#include <Arduino.h>
-#include "sdcard.h"
-#include "lcd.h"
+#include "includes.h"
 
 
 void start_sdcard(){

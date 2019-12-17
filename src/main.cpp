@@ -1,9 +1,5 @@
-#include <Arduino.h>
-#include "buzzer.h"
-#include "lcd.h"
-#include "helperfunctions.h"
-#include "UTFT.h"
-#include "URTouch.h"
+#include "includes.h"
+
 //#include <STM32SD.h>
 
 LCD lcd;
