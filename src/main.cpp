@@ -27,19 +27,17 @@ void setup() {
   myTouch.setPrecision(PREC_MEDIUM);
   lcd.lcd_console_log("EEPROM Init...");
   eeprom.init();
-  delay(500);
+  lcd.lcd_console_log("EEPROM Read  : 0x" + String(data_address,HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 0), HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 1), HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 2), HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 3), HEX));
   // BUZZER_ShortBeep();
-  lcd.consoleLine = 1;
   lcd.lcd_console_log("End Setup");
+  lcd.consoleLine = 1;
+  delay(500);
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
   delay(100);
-  if(data_address<=2048){
-    lcd.lcd_console_log(String(data_address,HEX) + " " + String(eeprom.readEEPROM(eeprom_address, data_address), HEX));
-    data_address++;
-  }
+  
   if(myTouch.dataAvailable()){
     myTouch.read();
     lcd.lcd_console_log("X " + String(myTouch.getX()) + " Y " + String(myTouch.getX()));

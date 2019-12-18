@@ -8,6 +8,7 @@ class EEPROM
     public:    
         void init();
         byte readEEPROM(int deviceaddress, unsigned int eeaddress );
+        void writeEEPROM(int deviceaddress, unsigned int eeaddress, byte data );
 };
 
 
