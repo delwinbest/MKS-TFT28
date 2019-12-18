@@ -106,3 +106,8 @@ void LCD::serialprint_lcd_registers()
   print_regs_serial(0x0f,1);//Read Display Self Diag result 
   print_regs_serial(0xd0,4);//Read Display Self Diag result 
 }
+
+void LCD::drawBitmap(int x, int y, int sx, int sy, unsigned short* data, int scale=1)
+{
+  myGLCD.drawBitmap (x, y, sx, sy, data, scale);
+}

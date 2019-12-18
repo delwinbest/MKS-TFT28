@@ -18,6 +18,7 @@ class LCD
     void serialprint_lcd_registers();
     void lcdprint_string(String string, int x, int y, int deg);
     void lcd_console_log(String string);
+    void drawBitmap(int x, int y, int sx, int sy, unsigned short* data, int scale);
 };
 
 #endif /*__ helperfunctions_H */
