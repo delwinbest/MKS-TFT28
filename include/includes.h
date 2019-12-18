@@ -11,6 +11,6 @@
 #include "helperfunctions.h"
 #include "UTFT.h"
 #include "URTouch.h"
-
+#include "eeprom.h"
 
 #endif
