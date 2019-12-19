@@ -14,7 +14,7 @@ void EEPROM::init()
 }
 
 
-byte EEPROM::readEEPROM(int deviceaddress, unsigned int eeaddress ) 
+byte EEPROM::readEEPROM(int deviceaddress, unsigned int eeaddress) 
 {
     byte rdata = 0xFF;
     Wire.beginTransmission(deviceaddress);

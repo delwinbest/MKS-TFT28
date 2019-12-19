@@ -5,6 +5,7 @@
 LCD lcd;
 EEPROM eeprom;
 URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
+EEPROMConfig eeprom_config;
 
 //Sd2Card card;
 //SdFatFs fatFs;
@@ -25,10 +26,12 @@ void setup() {
   lcd.lcd_console_log("URTouch Init...");
   myTouch.InitTouch(1);
   myTouch.setPrecision(PREC_MEDIUM);
-  lcd.lcd_console_log("EEPROM Init...");
+  lcd.lcd_console_log("Load EEPROM Config..");
   eeprom.init();
-  lcd.lcd_console_log("EEPROM Read  : 0x" + String(data_address,HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 0), HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 1), HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 2), HEX) + " " + String(eeprom.readEEPROM(eeprom_address, 3), HEX));
-  // BUZZER_ShortBeep();
+  eeprom_config.loadConfig();
+  lcd.lcd_console_log("Config Ver: " + String(eeprom_config.settings.config_version));
+  lcd.lcd_console_log("a: " + String(eeprom_config.settings.a));
+  lcd.lcd_console_log("b: " + String(eeprom_config.settings.b));
   lcd.lcd_console_log("End Setup");
   lcd.consoleLine = 1;
   delay(500);

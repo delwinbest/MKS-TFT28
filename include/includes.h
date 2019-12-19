@@ -12,5 +12,7 @@
 #include "UTFT.h"
 #include "URTouch.h"
 #include "eeprom.h"
+#include "eeprom_config.h"
+
 
 #endif
