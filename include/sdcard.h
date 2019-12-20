@@ -9,7 +9,7 @@ class SDCard {
         SdVolume volume;
         File root;
         void init();
-        void printDirectory(File dir, int numTabs);
+        void printDirectory(File dir);
 };
 
 

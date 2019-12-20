@@ -12,7 +12,6 @@ void SDCard::init(){
   lcd.lcd_console_log("SDCard Init..");
   if (!card.init(SPI_HALF_SPEED, SDCARD_CS)) {
     lcd.lcd_console_log("SDCard init failed.");
-    delay(1000);
     return;
   } 
 
@@ -39,7 +38,6 @@ void SDCard::init(){
   //lcd.lcd_console_log("Clusters: " + String(volume.clusterCount()));
   //lcd.lcd_console_log("Blocks x Cluster: " + String(volume.blocksPerCluster()));
   //lcd.lcd_console_log("Total Blocks: " + String(volume.blocksPerCluster() * volume.clusterCount()));
-
   // print the type and size of the first FAT-type volume
   uint32_t volumesize;
   lcd.lcd_console_log("Volume type is: FAT" + String(volume.fatType(), DEC));
@@ -54,25 +52,17 @@ void SDCard::init(){
   root = SD.open("/");
 }
 
-void SDCard::printDirectory(File dir, int numTabs) {
+void SDCard::printDirectory(File dir) {
   while (true) {
-
+    String folder = dir.name();
     File entry =  dir.openNextFile();
     if (! entry) {
-      lcd.lcd_console_log("EOF");
       break;
     }
-    for (uint8_t i = 0; i < numTabs; i++) {
-      lcd.lcd_console_log(" ");
-    }
-    lcd.lcd_console_log(entry.name());
     if (entry.isDirectory()) {
-      //lcd.lcd_console_log("/");
-      printDirectory(entry, numTabs + 1);
+      //printDirectory(entry);
     } else {
-      // files have sizes, directories do not
-      //lcd.lcd_console_log("\t\t");
-      lcd.lcd_console_log(String(entry.size(), DEC));
+      lcd.lcd_console_log(folder + "/" + entry.name() + " " + String(entry.size(), DEC));
     }
     entry.close();
   }

@@ -50,6 +50,7 @@ void LCD::lcd_console_log(String string){
   lcdprint_string(string, 1, consoleLine, 0);
   if( consoleLine > 230) {
     consoleLine = 1;
+    delay(1000);
   } else {
     consoleLine = consoleLine+10;
   }

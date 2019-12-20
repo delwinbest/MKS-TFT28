@@ -28,7 +28,9 @@ void setup() {
   eeprom.init();
   eeprom_config.loadConfig();
   sdcard.init();
-  sdcard.printDirectory(sdcard.root,0);
+  if(sdcard.root.name() != NULL){
+    sdcard.printDirectory(sdcard.root);
+  }
   lcd.lcd_console_log("End Setup");
   lcd.consoleLine = 1;
   delay(500);
