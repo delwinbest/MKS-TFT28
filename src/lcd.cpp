@@ -3,7 +3,7 @@
 UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,LCD_RD,LANDSCAPE);
 
 
-void LCD::start_lcd(){
+void LCD::init(){
   myGLCD.Init(PORTRAIT);
   myGLCD.clrScr();
   myGLCD.setBackColor(0,0,0);
@@ -50,6 +50,7 @@ void LCD::lcd_console_log(String string){
   lcdprint_string(string, 1, consoleLine, 0);
   if( consoleLine > 230) {
     consoleLine = 1;
+    delay(1000);
   } else {
     consoleLine = consoleLine+10;
   }

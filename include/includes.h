@@ -13,6 +13,7 @@
 #include "URTouch.h"
 #include "eeprom.h"
 #include "eeprom_config.h"
+#include "sdcard.h"
 
 
 #endif
