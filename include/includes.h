@@ -6,6 +6,7 @@
 
 
 #include <Arduino.h>
+#include <SD.h>
 #include "buzzer.h"
 #include "lcd.h"
 #include "helperfunctions.h"
