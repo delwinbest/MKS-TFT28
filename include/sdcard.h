@@ -1,11 +1,16 @@
-#ifndef __lcd_H
-#define __lcd_H
+#ifndef __sdcard_H
+#define __sdcard_H
 
-/* Helper Functions for lcd */
-/* These should be refactored out over time into their respective libaries */
+#include <SD.h>
+
+class SDCard {
+    public:
+        Sd2Card card;
+        SdVolume volume;
+        File root;
+        void init();
+        void printDirectory(File dir, int numTabs);
+};
 
 
-void start_sdcard();
-
-
-#endif /*__ helperfunctions_H */
+#endif 

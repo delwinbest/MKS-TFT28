@@ -7,6 +7,7 @@ extern URTouch myTouch;
 
 
 void EEPROMConfig::loadConfig() {
+  lcd.lcd_console_log("Load EEPROM Config..");
   // Validate Config else request restore to default
   if (eeprom.readEEPROM(eeprom_address, CONFIG_START + sizeof(settings) - 2) == settings.config_version[2] &&
       eeprom.readEEPROM(eeprom_address, CONFIG_START + sizeof(settings) - 3) == settings.config_version[1] &&
@@ -24,6 +25,7 @@ void EEPROMConfig::loadConfig() {
     while(!myTouch.dataAvailable()){};
     saveConfig();
   }
+  lcd.lcd_console_log("Config Ver: " + String(settings.config_version));
 }
 
 void EEPROMConfig::saveConfig() {

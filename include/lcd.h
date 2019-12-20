@@ -8,7 +8,7 @@ class LCD
 {
     public:
         int consoleLine = 1;
-        void start_lcd();
+        void init();
         String get_lcd_registers(int regs, int reads);
         void start_pwm_backlight();
         void print_regs_serial(int regs,int reads);

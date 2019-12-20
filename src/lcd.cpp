@@ -3,7 +3,7 @@
 UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,LCD_RD,LANDSCAPE);
 
 
-void LCD::start_lcd(){
+void LCD::init(){
   myGLCD.Init(PORTRAIT);
   myGLCD.clrScr();
   myGLCD.setBackColor(0,0,0);

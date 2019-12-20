@@ -6,7 +6,6 @@
 
 
 #include <Arduino.h>
-#include <SD.h>
 #include "buzzer.h"
 #include "lcd.h"
 #include "helperfunctions.h"
@@ -14,6 +13,7 @@
 #include "URTouch.h"
 #include "eeprom.h"
 #include "eeprom_config.h"
+#include "sdcard.h"
 
 
 #endif
