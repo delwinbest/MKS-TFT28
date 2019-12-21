@@ -31,9 +31,9 @@ Disconnect MKS TFT from printer before connecting ST-LINK. Do not connect ST-LIN
 
     BOOT Mode: Boot0 = 0, Boot 1 = 0
 
-    SPI1: SERIAL FLASH MEMORY: Winbond 8MB (64Mb) Serial Flash Memory on SPI1
-    SPI3: Two-wire Serial EEPROM AT24C16B / Touch ???
-    I2C: Two-wire Serial EEPROM AT24C16B ????
+    SPI1: SERIAL FLASH MEMORY: Winbond 8MB (64Mb) Serial Flash Memory W25Q CS: PB9
+    SPI1: URTouch CS: PC5
+    I2C: Two-wire Serial EEPROM AT24C16B 
     UART1: Wifi connector
     UART2: Octopi
     UART4: Touch controller
