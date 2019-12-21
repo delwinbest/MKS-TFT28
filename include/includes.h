@@ -2,10 +2,11 @@
 #define _INCLUDES_H_
 
 
-//#include <stdint.h>
+
 
 
 #include <Arduino.h>
+#include <stdint.h>
 #include "buzzer.h"
 #include "lcd.h"
 #include "helperfunctions.h"
@@ -14,6 +15,7 @@
 #include "eeprom.h"
 #include "eeprom_config.h"
 #include "sdcard.h"
+
 
 
 #endif

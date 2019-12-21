@@ -1,13 +1,13 @@
 #include "includes.h"
-#include<SPIMemory.h>
+//#include<SPIMemory.h>
 
 LCD lcd;
 EEPROM eeprom;
 URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
 EEPROMConfig eeprom_config;
-SDCard sdcard;
+//SDCard sdcard;
 
-SPIFlash flash(FLASH_CS);
+//SPIFlash flash(FLASH_CS);
 
 int data_address=0;
 
@@ -28,20 +28,20 @@ void setup() {
   myTouch.setPrecision(PREC_MEDIUM);
   eeprom.init();
   eeprom_config.loadConfig();
-  sdcard.init();
-  if(sdcard.root.name() != NULL){
-    sdcard.printDirectory(sdcard.root);
-  }
-  lcd.lcd_console_log("SPIFlash Begin...");
-  flash.begin(MB(8));
-  uint32_t JEDEC = flash.getJEDECID();
-  long long _uniqueID = flash.getUniqueID();
-  if (JEDEC) {
-    lcd.lcd_console_log("JEDECID ID: 0x" + String(JEDEC, HEX));
-    lcd.lcd_console_log("Unique ID: 0x" + String(uint32_t(_uniqueID >> 32), HEX) + String(uint32_t(_uniqueID), HEX));
-  } else {
-    lcd.lcd_console_log("SPIFlash ERR");
-  }
+  //sdcard.init();
+  // if(sdcard.root.name() != NULL){
+  //   sdcard.printDirectory(sdcard.root);
+  // }
+  //lcd.lcd_console_log("SPIFlash Begin...");
+  //flash.begin(MB(8));
+  // uint32_t JEDEC = flash.getJEDECID();
+  // long long _uniqueID = flash.getUniqueID();
+  // if (JEDEC) {
+  //   lcd.lcd_console_log("JEDECID ID: 0x" + String(JEDEC, HEX));
+  //   lcd.lcd_console_log("Unique ID: 0x" + String(uint32_t(_uniqueID >> 32), HEX) + String(uint32_t(_uniqueID), HEX));
+  // } else {
+  //   lcd.lcd_console_log("SPIFlash ERR");
+  // }
   
 
   lcd.lcd_console_log("End Setup");
