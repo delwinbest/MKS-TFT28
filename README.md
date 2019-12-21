@@ -31,9 +31,9 @@ Disconnect MKS TFT from printer before connecting ST-LINK. Do not connect ST-LIN
 
     BOOT Mode: Boot0 = 0, Boot 1 = 0
 
-    SPI (default): SPIFlash: Winbond 8MB (64Mb) Serial Flash Memory W25Q CS: PB9,MOSI=PA7,PIN_SPI_MISO=PA6,PIN_SPI_SCK=PA5
-    SPI (default): SDCard CS: PD11, MOSI=PA7,PIN_SPI_MISO=PA6,PIN_SPI_SCK=PA5
-    SPI1: URTouch CS: PC5
+    SPI1 (default): SPIFlash: Winbond 8MB (64Mb) Serial Flash Memory W25Q CS: PB9,MOSI=PA7,PIN_SPI_MISO=PA6,PIN_SPI_SCK=PA5
+    SPI1 (default): SDCard CS: PD11, MOSI=PA7,PIN_SPI_MISO=PA6,PIN_SPI_SCK=PA5
+    SPI3 (remapped): URTouch CS: PC5
     I2C: Two-wire Serial EEPROM AT24C16B 
     UART1: Wifi connector
     UART2: Octopi

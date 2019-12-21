@@ -8,20 +8,20 @@
 
 void W25Qxx_SPI_CS_Set(uint8_t level)
 {
-  SPI_CS_Set(W25Qxx_SPI,level);
+  digitalWrite(FLASH_CS, level);
 }
 
 
 uint8_t W25Qxx_SPI_Read_Write_Byte(uint8_t data)
 {
-  return SPI_Read_Write(W25Qxx_SPI,data);
+  return W25Qxx_SPI.transfer(data);
 }
 
 
 void W25Qxx_Init(void)
 {
-  SPI_Config(W25Qxx_SPI);
-  SPI_Protocol_Init(W25Qxx_SPI, W25Qxx_SPEED);
+  //SPI1 (default): SPIFlash: Winbond 8MB (64Mb) Serial Flash Memory W25Q CS: PB9,MOSI=PA7,PIN_SPI_MISO=PA6,PIN_SPI_SCK=PA5
+  W25Qxx_SPI.begin();
   W25Qxx_SPI_CS_Set(1);
 }
 
