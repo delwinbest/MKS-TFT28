@@ -143,28 +143,37 @@ extern "C" {
 #define LED_GREEN               LED_BUILTIN
 #define LED_RED  PB0
 
-// SPI Definitions
-#define PIN_SPI_SS              PA4
-#define PIN_SPI_MOSI            PA7
-#define PIN_SPI_MISO            PA6
-#define PIN_SPI_SCK             PA5
+// SPI1 Definitions
+#define PIN_SPI1_SS              PA4
+#define PIN_SPI1_MOSI            PA7
+#define PIN_SPI1_MISO            PA6
+#define PIN_SPI1_SCK             PA5
 
-// SPI Definitions
-#define PIN_SPI2_SS              PA15
-#define PIN_SPI2_MOSI            PB5
-#define PIN_SPI2_MISO            PB4
-#define PIN_SPI2_SCK             PB3
+#define PIN_SPI_SS              PIN_SPI1_SS
+#define PIN_SPI_MOSI            PIN_SPI1_MOSI
+#define PIN_SPI_MISO            PIN_SPI1_MISO
+#define PIN_SPI_SCK             PIN_SPI1_SCK
 
 // SPI2 Definitions
-#define PIN_SPI1_SS              PC9
-#define PIN_SPI1_MOSI            PC12
-#define PIN_SPI1_MISO            PC11
-#define PIN_SPI1_SCK             PC10
+#define PIN_SPI2_SS              PB12
+#define PIN_SPI2_MOSI            PB15
+#define PIN_SPI2_MISO            PB14
+#define PIN_SPI2_SCK             PB13
 
-#define PIN_SPI0_SS              PB12
-#define PIN_SPI0_MOSI            PB15
-#define PIN_SPI0_MISO            PB14
-#define PIN_SPI0_SCK             PB13
+// // Comment One or other SPI3 out
+// // SPI3 Definitions
+// #define PIN_SPI3_SS              PA15
+// #define PIN_SPI3_MOSI            PB5
+// #define PIN_SPI3_MISO            PB4
+// #define PIN_SPI3_SCK             PB3
+
+// Comment One or other SPI3 out
+// SPI3 Remapped Definitions 
+#define PIN_SPI3_SS              PC9
+#define PIN_SPI3_MOSI            PC12
+#define PIN_SPI3_MISO            PC11
+#define PIN_SPI3_SCK             PC10
+
 
   
 // I2C Definitions
