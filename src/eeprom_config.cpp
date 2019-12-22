@@ -1,13 +1,16 @@
 #include "includes.h"
+#include "eeprom.h"
 #include "eeprom_config.h"
 
-extern EEPROM eeprom;
+
+EEPROM eeprom;
 extern LCD lcd;
 extern URTouch myTouch;
 
 
 void EEPROMConfig::loadConfig() {
   lcd.lcd_console_log("Load EEPROM Config..");
+  eeprom.init();
   // Validate Config else request restore to default
   if (eeprom.readEEPROM(eeprom_address, CONFIG_START + sizeof(settings) - 2) == settings.config_version[2] &&
       eeprom.readEEPROM(eeprom_address, CONFIG_START + sizeof(settings) - 3) == settings.config_version[1] &&

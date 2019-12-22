@@ -1,7 +1,7 @@
 #include "includes.h"
 #include <Wire.h>
 
-
+#include "eeprom.h"
 
 void EEPROM::init()
 {

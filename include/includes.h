@@ -15,13 +15,9 @@
 #include "w25qxx.h"
 #include "buzzer.h"
 #include "lcd.h"
-#include "helperfunctions.h"
 #include "UTFT.h"
 #include "URTouch.h"
-#include "eeprom.h"
 #include "eeprom_config.h"
 #include "sd.h"
-
-
 
 #endif
