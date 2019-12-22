@@ -1,10 +1,8 @@
 #include "w25qxx.h"
 #include "SPI.h"
 
-/*************************** W25Qxx SPI ģʽ�ײ���ֲ�Ľӿ� ***************************/
-#define W25Qxx_SPI     SPI
-//#define W25Qxx_SPEED   0
 
+#define W25Qxx_SPI     SPI
 
 void W25Qxx_SPI_CS_Set(uint8_t level)
 {
@@ -21,7 +19,9 @@ uint8_t W25Qxx_SPI_Read_Write_Byte(uint8_t data)
 void W25Qxx_Init(void)
 {
   //SPI1 (default): SPIFlash: Winbond 8MB (64Mb) Serial Flash Memory W25Q CS: PB9,MOSI=PA7,PIN_SPI_MISO=PA6,PIN_SPI_SCK=PA5
+  pinMode(FLASH_CS, OUTPUT);
   W25Qxx_SPI.begin();
+  W25Qxx_SPI.setClockDivider(SPI_BAUDRATEPRESCALER_2);
   W25Qxx_SPI_CS_Set(1);
 }
 
@@ -74,9 +74,9 @@ void W25Qxx_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteTo
   uint8_t NumOfPage = 0, NumOfSingle = 0, Addr = 0, count = 0, temp = 0;
 
   Addr = WriteAddr % W25QXX_SPI_PAGESIZE;
-  count = W25QXX_SPI_PAGESIZE - Addr;//������ҳ������д��������
-  NumOfPage =  NumByteToWrite / W25QXX_SPI_PAGESIZE;//����Ҫ��������ݳ��ȿ���д����ҳ
-  NumOfSingle = NumByteToWrite % W25QXX_SPI_PAGESIZE;//����������ҳ�����⣬������д�����ݳ���
+  count = W25QXX_SPI_PAGESIZE - Addr;
+  NumOfPage =  NumByteToWrite / W25QXX_SPI_PAGESIZE;
+  NumOfSingle = NumByteToWrite % W25QXX_SPI_PAGESIZE;
 
   if (Addr == 0) /*!< WriteAddr is sFLASH_PAGESIZE aligned  */
   {
@@ -159,7 +159,6 @@ void W25Qxx_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRe
   W25Qxx_SPI_CS_Set(1);
 }
 
-//��ID
 uint32_t W25Qxx_ReadID(void)
 {
   uint32_t Temp = 0;
@@ -176,7 +175,6 @@ uint32_t W25Qxx_ReadID(void)
   return Temp;
 }
 
-//��������
 void W25Qxx_EraseSector(uint32_t SectorAddr)
 {
   W25Qxx_WriteEnable();
@@ -191,7 +189,6 @@ void W25Qxx_EraseSector(uint32_t SectorAddr)
   W25Qxx_WaitForWriteEnd();
 }
 
-//�����
 void W25Qxx_EraseBlock(uint32_t BlockAddr)
 {
   W25Qxx_WriteEnable();
@@ -206,7 +203,6 @@ void W25Qxx_EraseBlock(uint32_t BlockAddr)
   W25Qxx_WaitForWriteEnd();
 }
 
-//ȫƬ����
 void W25Qxx_EraseBulk(void)
 {
   W25Qxx_WriteEnable();

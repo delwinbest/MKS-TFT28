@@ -2,6 +2,7 @@
 #define _W25QXX_H_
 #include "includes.h"
 
+
 #define CMD_WRITE_ENABLE   0x06
 #define CMD_WRITE_DISABLE  0x04
 #define CMD_READ_REGISTER1 0x05
