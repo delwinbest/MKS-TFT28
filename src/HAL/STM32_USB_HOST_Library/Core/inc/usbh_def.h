@@ -47,6 +47,7 @@
 #define TRUE 1
 #endif
 
+#include <stdint.h>
 
 #define ValBit(VAR,POS)                               (VAR & (1 << POS))
 #define SetBit(VAR,POS)                               (VAR |= (1 << POS))

@@ -27,7 +27,7 @@
 #include "usb_hcd.h"
 #include "usbh_def.h"
 #include "usbh_conf.h"
-
+#include <stdint.h>
 /** @addtogroup USBH_LIB
   * @{
   */

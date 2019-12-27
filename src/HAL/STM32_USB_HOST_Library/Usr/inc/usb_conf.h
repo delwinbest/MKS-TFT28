@@ -22,7 +22,7 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __USB_CONF__H__
 #define __USB_CONF__H__
-
+#include <stdint.h>
 //#include "variants.h"
 
 

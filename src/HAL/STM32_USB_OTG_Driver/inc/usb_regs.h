@@ -75,24 +75,24 @@
   */
 typedef struct _USB_OTG_GREGS  /* 000h */
 {
-  __IO uint32_t GOTGCTL;      /* USB_OTG Control and Status Register    000h*/
-  __IO uint32_t GOTGINT;      /* USB_OTG Interrupt Register             004h*/
-  __IO uint32_t GAHBCFG;      /* Core AHB Configuration Register    008h*/
-  __IO uint32_t GUSBCFG;      /* Core USB Configuration Register    00Ch*/
-  __IO uint32_t GRSTCTL;      /* Core Reset Register                010h*/
-  __IO uint32_t GINTSTS;      /* Core Interrupt Register            014h*/
-  __IO uint32_t GINTMSK;      /* Core Interrupt Mask Register       018h*/
-  __IO uint32_t GRXSTSR;      /* Receive Sts Q Read Register        01Ch*/
-  __IO uint32_t GRXSTSP;      /* Receive Sts Q Read & POP Register  020h*/
-  __IO uint32_t GRXFSIZ;      /* Receive FIFO Size Register         024h*/
-  __IO uint32_t DIEPTXF0_HNPTXFSIZ;   /* EP0 / Non Periodic Tx FIFO Size Register 028h*/
-  __IO uint32_t HNPTXSTS;     /* Non Periodic Tx FIFO/Queue Sts reg 02Ch*/
+  volatile uint32_t GOTGCTL;      /* USB_OTG Control and Status Register    000h*/
+  volatile uint32_t GOTGINT;      /* USB_OTG Interrupt Register             004h*/
+  volatile uint32_t GAHBCFG;      /* Core AHB Configuration Register    008h*/
+  volatile uint32_t GUSBCFG;      /* Core USB Configuration Register    00Ch*/
+  volatile uint32_t GRSTCTL;      /* Core Reset Register                010h*/
+  volatile uint32_t GINTSTS;      /* Core Interrupt Register            014h*/
+  volatile uint32_t GINTMSK;      /* Core Interrupt Mask Register       018h*/
+  volatile uint32_t GRXSTSR;      /* Receive Sts Q Read Register        01Ch*/
+  volatile uint32_t GRXSTSP;      /* Receive Sts Q Read & POP Register  020h*/
+  volatile uint32_t GRXFSIZ;      /* Receive FIFO Size Register         024h*/
+  volatile uint32_t DIEPTXF0_HNPTXFSIZ;   /* EP0 / Non Periodic Tx FIFO Size Register 028h*/
+  volatile uint32_t HNPTXSTS;     /* Non Periodic Tx FIFO/Queue Sts reg 02Ch*/
   uint32_t Reserved30[2];     /* Reserved                           030h*/
-  __IO uint32_t GCCFG;        /* General Purpose IO Register        038h*/
-  __IO uint32_t CID;          /* User ID Register                   03Ch*/
+  volatile uint32_t GCCFG;        /* General Purpose IO Register        038h*/
+  volatile uint32_t CID;          /* User ID Register                   03Ch*/
   uint32_t  Reserved40[48];   /* Reserved                      040h-0FFh*/
-  __IO uint32_t HPTXFSIZ; /* Host Periodic Tx FIFO Size Reg     100h*/
-  __IO uint32_t DIEPTXF[USB_OTG_MAX_TX_FIFOS];/* dev Periodic Transmit FIFO */
+  volatile uint32_t HPTXFSIZ; /* Host Periodic Tx FIFO Size Reg     100h*/
+  volatile uint32_t DIEPTXF[USB_OTG_MAX_TX_FIFOS];/* dev Periodic Transmit FIFO */
 }
 USB_OTG_GREGS;
 /**
@@ -105,26 +105,26 @@ USB_OTG_GREGS;
   */
 typedef struct _USB_OTG_DREGS /* 800h */
 {
-  __IO uint32_t DCFG;         /* dev Configuration Register   800h*/
-  __IO uint32_t DCTL;         /* dev Control Register         804h*/
-  __IO uint32_t DSTS;         /* dev Status Register (RO)     808h*/
+  volatile uint32_t DCFG;         /* dev Configuration Register   800h*/
+  volatile uint32_t DCTL;         /* dev Control Register         804h*/
+  volatile uint32_t DSTS;         /* dev Status Register (RO)     808h*/
   uint32_t Reserved0C;           /* Reserved                     80Ch*/
-  __IO uint32_t DIEPMSK;   /* dev IN Endpoint Mask         810h*/
-  __IO uint32_t DOEPMSK;  /* dev OUT Endpoint Mask        814h*/
-  __IO uint32_t DAINT;     /* dev All Endpoints Itr Reg    818h*/
-  __IO uint32_t DAINTMSK; /* dev All Endpoints Itr Mask   81Ch*/
+  volatile uint32_t DIEPMSK;   /* dev IN Endpoint Mask         810h*/
+  volatile uint32_t DOEPMSK;  /* dev OUT Endpoint Mask        814h*/
+  volatile uint32_t DAINT;     /* dev All Endpoints Itr Reg    818h*/
+  volatile uint32_t DAINTMSK; /* dev All Endpoints Itr Mask   81Ch*/
   uint32_t  Reserved20;          /* Reserved                     820h*/
   uint32_t Reserved9;       /* Reserved                     824h*/
-  __IO uint32_t DVBUSDIS;    /* dev VBUS discharge Register  828h*/
-  __IO uint32_t DVBUSPULSE;  /* dev VBUS Pulse Register      82Ch*/
-  __IO uint32_t DTHRCTL;     /* dev thr                      830h*/
-  __IO uint32_t DIEPEMPMSK; /* dev empty msk             834h*/
-  __IO uint32_t DEACHINT;    /* dedicated EP interrupt       838h*/
-  __IO uint32_t DEACHMSK;    /* dedicated EP msk             83Ch*/  
+  volatile uint32_t DVBUSDIS;    /* dev VBUS discharge Register  828h*/
+  volatile uint32_t DVBUSPULSE;  /* dev VBUS Pulse Register      82Ch*/
+  volatile uint32_t DTHRCTL;     /* dev thr                      830h*/
+  volatile uint32_t DIEPEMPMSK; /* dev empty msk             834h*/
+  volatile uint32_t DEACHINT;    /* dedicated EP interrupt       838h*/
+  volatile uint32_t DEACHMSK;    /* dedicated EP msk             83Ch*/  
   uint32_t Reserved40;      /* dedicated EP mask           840h*/
-  __IO uint32_t DINEP1MSK;  /* dedicated EP mask           844h*/
+  volatile uint32_t DINEP1MSK;  /* dedicated EP mask           844h*/
   uint32_t  Reserved44[15];      /* Reserved                 844-87Ch*/
-  __IO uint32_t DOUTEP1MSK; /* dedicated EP msk            884h*/   
+  volatile uint32_t DOUTEP1MSK; /* dedicated EP msk            884h*/   
 }
 USB_OTG_DREGS;
 /**
@@ -137,13 +137,13 @@ USB_OTG_DREGS;
   */
 typedef struct _USB_OTG_INEPREGS
 {
-  __IO uint32_t DIEPCTL; /* dev IN Endpoint Control Reg 900h + (ep_num * 20h) + 00h*/
+  volatile uint32_t DIEPCTL; /* dev IN Endpoint Control Reg 900h + (ep_num * 20h) + 00h*/
   uint32_t Reserved04;             /* Reserved                       900h + (ep_num * 20h) + 04h*/
-  __IO uint32_t DIEPINT; /* dev IN Endpoint Itr Reg     900h + (ep_num * 20h) + 08h*/
+  volatile uint32_t DIEPINT; /* dev IN Endpoint Itr Reg     900h + (ep_num * 20h) + 08h*/
   uint32_t Reserved0C;             /* Reserved                       900h + (ep_num * 20h) + 0Ch*/
-  __IO uint32_t DIEPTSIZ; /* IN Endpoint Txfer Size   900h + (ep_num * 20h) + 10h*/
-  __IO uint32_t DIEPDMA; /* IN Endpoint DMA Address Reg    900h + (ep_num * 20h) + 14h*/
-  __IO uint32_t DTXFSTS;/*IN Endpoint Tx FIFO Status Reg 900h + (ep_num * 20h) + 18h*/
+  volatile uint32_t DIEPTSIZ; /* IN Endpoint Txfer Size   900h + (ep_num * 20h) + 10h*/
+  volatile uint32_t DIEPDMA; /* IN Endpoint DMA Address Reg    900h + (ep_num * 20h) + 14h*/
+  volatile uint32_t DTXFSTS;/*IN Endpoint Tx FIFO Status Reg 900h + (ep_num * 20h) + 18h*/
   uint32_t Reserved18;             /* Reserved  900h+(ep_num*20h)+1Ch-900h+ (ep_num * 20h) + 1Ch*/
 }
 USB_OTG_INEPREGS;
@@ -157,12 +157,12 @@ USB_OTG_INEPREGS;
   */
 typedef struct _USB_OTG_OUTEPREGS
 {
-  __IO uint32_t DOEPCTL;       /* dev OUT Endpoint Control Reg  B00h + (ep_num * 20h) + 00h*/
+  volatile uint32_t DOEPCTL;       /* dev OUT Endpoint Control Reg  B00h + (ep_num * 20h) + 00h*/
   uint32_t Reserved04;         /* Reserved                      B00h + (ep_num * 20h) + 04h*/
-  __IO uint32_t DOEPINT;       /* dev OUT Endpoint Itr Reg      B00h + (ep_num * 20h) + 08h*/
+  volatile uint32_t DOEPINT;       /* dev OUT Endpoint Itr Reg      B00h + (ep_num * 20h) + 08h*/
   uint32_t Reserved0C;         /* Reserved                      B00h + (ep_num * 20h) + 0Ch*/
-  __IO uint32_t DOEPTSIZ;      /* dev OUT Endpoint Txfer Size   B00h + (ep_num * 20h) + 10h*/
-  __IO uint32_t DOEPDMA;       /* dev OUT Endpoint DMA Address  B00h + (ep_num * 20h) + 14h*/
+  volatile uint32_t DOEPTSIZ;      /* dev OUT Endpoint Txfer Size   B00h + (ep_num * 20h) + 10h*/
+  volatile uint32_t DOEPDMA;       /* dev OUT Endpoint DMA Address  B00h + (ep_num * 20h) + 14h*/
   uint32_t Reserved18[2];      /* Reserved B00h + (ep_num * 20h) + 18h - B00h + (ep_num * 20h) + 1Ch*/
 }
 USB_OTG_OUTEPREGS;
@@ -176,13 +176,13 @@ USB_OTG_OUTEPREGS;
   */
 typedef struct _USB_OTG_HREGS
 {
-  __IO uint32_t HCFG;             /* Host Configuration Register    400h*/
-  __IO uint32_t HFIR;      /* Host Frame Interval Register   404h*/
-  __IO uint32_t HFNUM;         /* Host Frame Nbr/Frame Remaining 408h*/
+  volatile uint32_t HCFG;             /* Host Configuration Register    400h*/
+  volatile uint32_t HFIR;      /* Host Frame Interval Register   404h*/
+  volatile uint32_t HFNUM;         /* Host Frame Nbr/Frame Remaining 408h*/
   uint32_t Reserved40C;                   /* Reserved                       40Ch*/
-  __IO uint32_t HPTXSTS;   /* Host Periodic Tx FIFO/ Queue Status 410h*/
-  __IO uint32_t HAINT;   /* Host All Channels Interrupt Register 414h*/
-  __IO uint32_t HAINTMSK;   /* Host All Channels Interrupt Mask 418h*/
+  volatile uint32_t HPTXSTS;   /* Host Periodic Tx FIFO/ Queue Status 410h*/
+  volatile uint32_t HAINT;   /* Host All Channels Interrupt Register 414h*/
+  volatile uint32_t HAINTMSK;   /* Host All Channels Interrupt Mask 418h*/
 }
 USB_OTG_HREGS;
 /**
@@ -195,12 +195,12 @@ USB_OTG_HREGS;
   */
 typedef struct _USB_OTG_HC_REGS
 {
-  __IO uint32_t HCCHAR;
-  __IO uint32_t HCSPLT;
-  __IO uint32_t HCINT;
-  __IO uint32_t HCINTMSK;
-  __IO uint32_t HCTSIZ;
-  __IO uint32_t HCDMA;
+  volatile uint32_t HCCHAR;
+  volatile uint32_t HCSPLT;
+  volatile uint32_t HCINT;
+  volatile uint32_t HCINTMSK;
+  volatile uint32_t HCTSIZ;
+  volatile uint32_t HCDMA;
   uint32_t Reserved[2];
 }
 USB_OTG_HC_REGS;
@@ -220,9 +220,9 @@ typedef struct USB_OTG_core_regs /* 000h */
   USB_OTG_INEPREGS      *INEP_REGS[USB_OTG_MAX_TX_FIFOS];
   USB_OTG_OUTEPREGS     *OUTEP_REGS[USB_OTG_MAX_TX_FIFOS];
   USB_OTG_HC_REGS       *HC_REGS[USB_OTG_MAX_TX_FIFOS];
-  __IO uint32_t         *HPRT0;
-  __IO uint32_t         *DFIFO[USB_OTG_MAX_TX_FIFOS];
-  __IO uint32_t         *PCGCCTL;
+  volatile uint32_t         *HPRT0;
+  volatile uint32_t         *DFIFO[USB_OTG_MAX_TX_FIFOS];
+  volatile uint32_t         *PCGCCTL;
 }
 USB_OTG_CORE_REGS , *PUSB_OTG_CORE_REGS;
 typedef union _USB_OTG_GOTGCTL_TypeDef 

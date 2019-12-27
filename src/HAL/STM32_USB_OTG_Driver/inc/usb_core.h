@@ -27,7 +27,7 @@
 #include "usb_conf.h"
 #include "usb_regs.h"
 #include "usb_defines.h"
-
+#include <stdint.h>
 
 /** @addtogroup USB_OTG_DRIVER
   * @{
@@ -261,12 +261,12 @@ DCD_DEV , *DCD_PDEV;
 typedef struct _HCD
 {
   uint8_t                  Rx_Buffer [MAX_DATA_LENGTH];  
-  __IO uint32_t            ConnSts;
-  __IO uint32_t            PortEnabled;
-  __IO uint32_t            ErrCnt[USB_OTG_MAX_TX_FIFOS];
-  __IO uint32_t            XferCnt[USB_OTG_MAX_TX_FIFOS];
-  __IO HC_STATUS           HC_Status[USB_OTG_MAX_TX_FIFOS];  
-  __IO URB_STATE           URB_State[USB_OTG_MAX_TX_FIFOS];
+  volatile uint32_t            ConnSts;
+  volatile uint32_t            PortEnabled;
+  volatile uint32_t            ErrCnt[USB_OTG_MAX_TX_FIFOS];
+  volatile uint32_t            XferCnt[USB_OTG_MAX_TX_FIFOS];
+  volatile HC_STATUS           HC_Status[USB_OTG_MAX_TX_FIFOS];  
+  volatile URB_STATE           URB_State[USB_OTG_MAX_TX_FIFOS];
   USB_OTG_HC               hc [USB_OTG_MAX_TX_FIFOS];
   uint16_t                 channel [USB_OTG_MAX_TX_FIFOS];
 }

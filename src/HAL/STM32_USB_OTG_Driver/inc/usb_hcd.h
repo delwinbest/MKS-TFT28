@@ -26,7 +26,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "usb_regs.h"
 #include "usb_core.h"
-
+#include <stdint.h>
 
 /** @addtogroup USB_OTG_DRIVER
   * @{
