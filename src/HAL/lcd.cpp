@@ -1,4 +1,6 @@
 #include "includes.h"
+#include "lcd.h"
+#include "UTFT.h"
 
 UTFT myGLCD(HX8353C,LCD_RS,LCD_WR,LCD_CS,LCD_RD,LANDSCAPE);
 

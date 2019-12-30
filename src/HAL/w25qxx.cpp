@@ -213,5 +213,3 @@ void W25Qxx_EraseBulk(void)
 
   W25Qxx_WaitForWriteEnd();
 }
-
-

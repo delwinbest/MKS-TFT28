@@ -1,6 +1,8 @@
 #include "includes.h"
 #include "eeprom.h"
 #include "eeprom_config.h"
+#include "lcd.h"
+#include "URTouch.h"
 
 
 EEPROM eeprom;

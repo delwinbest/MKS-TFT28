@@ -22,7 +22,7 @@ long map(long x, long in_min, long in_max, long out_min, long out_max)
   return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-int intToString(char* str, int n, int radix, char isNegative)  //将整数表达成字符形态
+int intToString(char* str, int n, int radix, char isNegative)  
 {
   int i = 0, j = 0, remain = 0;
   int len = 0;
@@ -38,7 +38,7 @@ int intToString(char* str, int n, int radix, char isNegative)  //将整数表达
   {
     remain = n % radix;
     if (remain > 9)
-      str[i] = remain - 10 + 'A';  //为了十六进制，10将表示成A
+      str[i] = remain - 10 + 'A';  
     else
       str[i] = remain + '0';      //将整数+'0' = 整数对应的ASCII码
     i++;

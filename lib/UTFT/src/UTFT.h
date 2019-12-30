@@ -158,10 +158,10 @@
 #define BLACK		0x0000
 #define WHITE		0xFFFF
 #define RED			0xF800
-#define GREEN		0x0400
+//#define GREEN		0x0400
 #define BLUE		0x001F
 #define SILVER		0xC618
-#define GRAY		0x8410
+//#define GRAY		0x8410
 #define MAROON		0x8000
 #define YELLOW		0xFFE0
 #define OLIVE		0x8400

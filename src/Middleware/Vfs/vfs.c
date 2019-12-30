@@ -14,8 +14,8 @@ bool mountFS(void)
     case TFT_UDISK:
       return mountUDisk();
     
-    case BOARD_SD:
-      return mountGcodeSDCard();
+    // case BOARD_SD:
+    //   return mountGcodeSDCard();
   }
   return false;
 }
@@ -45,40 +45,40 @@ TCHAR* getCurFileSource(void)
   {
     case TFT_SD:     return "SD:";
     case TFT_UDISK:  return "U:";
-    case BOARD_SD:   return "bSD:";
+    //case BOARD_SD:   return "bSD:";
   }
   return NULL;
 }
 
 /* 
 infoFile
-*/
-void resetInfoFile(void)
-{
-  FS_SOURCE source = infoFile.source;
-  clearInfoFile();
-  memset(&infoFile, 0, sizeof(infoFile));
-  infoFile.source = source;
+ */
+// void resetInfoFile(void)
+// {
+//   FS_SOURCE source = infoFile.source;
+//   clearInfoFile();
+//   memset(&infoFile, 0, sizeof(infoFile));
+//   infoFile.source = source;
   
-  strcpy(infoFile.title, getCurFileSource());
-}
+//   strcpy(infoFile.title, getCurFileSource());
+// }
 
 /* 
 */
-bool scanPrintFiles(void)
-{
-  clearInfoFile();
-  switch (infoFile.source)
-  {
-    case TFT_SD:
-    case TFT_UDISK:
-      return scanPrintFilesFatFs();
+// bool scanPrintFiles(void)
+// {
+//   clearInfoFile();
+//   switch (infoFile.source)
+//   {
+//     case TFT_SD:
+//     case TFT_UDISK:
+//       return scanPrintFilesFatFs();
     
-    case BOARD_SD:
-      return scanPrintFilesGcodeFs();
-  }
-  return false;
-}
+//     case BOARD_SD:
+//       return scanPrintFilesGcodeFs();
+//   }
+//   return false;
+// }
 
 /*
 */
@@ -123,12 +123,12 @@ void loopVolumeSource(void)
 {   
   for (uint8_t i = 0; i < FF_VOLUMES; i++)
   {     
-    if(volumeSrcStatus[i] != (*volumeInserted[i])())
-    {
-      const int16_t labelSDStates[FF_VOLUMES][2] = {{LABEL_TFTSD_REMOVED,  LABEL_TFTSD_INSERTED},
-                                                  {LABEL_U_DISK_REMOVED, LABEL_U_DISK_INSERTED}};
-      volumeSrcStatus[i] = (*volumeInserted[i])();
-      //volumeReminderMessage(labelSDStates[i][volumeSrcStatus[i]], STATUS_NORMAL); TBD
-    }
+    // if(volumeSrcStatus[i] != (*volumeInserted[i])())
+    // {
+    //   const int16_t labelSDStates[FF_VOLUMES][2] = {{LABEL_TFTSD_REMOVED,  LABEL_TFTSD_INSERTED},
+    //                                               {LABEL_U_DISK_REMOVED, LABEL_U_DISK_INSERTED}};
+    //   volumeSrcStatus[i] = (*volumeInserted[i])();
+    //   volumeReminderMessage(labelSDStates[i][volumeSrcStatus[i]], STATUS_NORMAL); TBD
+    // }
   }
 }
