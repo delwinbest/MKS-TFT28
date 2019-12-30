@@ -19,6 +19,6 @@
 #include "URTouch.h"
 #include "eeprom_config.h"
 #include "sd.h"
-#include "sdcard.h"
+//#include "sdcard.h"
 
 #endif
