@@ -1,11 +1,9 @@
 #include "includes.h"
-//#include "lcd.h"
-//#include<SPIMemory.h>
 
 LCD lcd;
-// URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
-//EEPROMConfig eeprom_config;
-//SDCard sdcard;
+URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
+EEPROMConfig eeprom_config;
+SDCard sdcard;
 
 //SPIFlash flash(FLASH_CS);
 
@@ -20,29 +18,29 @@ void setup() {
   lcd.init();
   lcd.lcd_console_log("Booting...");
   lcd.lcd_console_log("URTouch Init...");
-  //myTouch.InitTouch(1);
-  //myTouch.setPrecision(PREC_MEDIUM);
-  //eeprom_config.loadConfig();
-  // lcd.lcd_console_log("SD Test Init...");
+  myTouch.InitTouch(1);
+  myTouch.setPrecision(PREC_MEDIUM);
+  eeprom_config.loadConfig();
+  lcd.lcd_console_log("SD Test Init...");
   // if(SD_Init() == 0){
   //   lcd.lcd_console_log("SD Init returned 0");
   // } else {
   //   lcd.lcd_console_log("SD Init failed");
   // }
-  // uint32_t sectorcount;
-  // sectorcount = SD_Get_Sector_Count();
-  // if (sectorcount) {
-  //   lcd.lcd_console_log("Sector Count: " + String(uint32_t(sectorcount), DEC));
-  // } else {
-  //   lcd.lcd_console_log("SD ERR");
-  // }
+  uint32_t sectorcount;
+  sectorcount = SD_Get_Sector_Count();
+  if (sectorcount) {
+    lcd.lcd_console_log("Sector Count: " + String(uint32_t(sectorcount), DEC));
+  } else {
+    lcd.lcd_console_log("SD ERR");
+  }
 
-  //sdcard.init();
-  // if(sdcard.root.name() != NULL){
-  //   sdcard.printDirectory(sdcard.root);
-  // }
-  //lcd.lcd_console_log("SPIFlash Begin...");
-  // W25Qxx_Init();
+  sdcard.init();
+  if(sdcard.root.name() != NULL){
+    sdcard.printDirectory(sdcard.root);
+  }
+  lcd.lcd_console_log("SPIFlash Begin...");
+  W25Qxx_Init();
 
   // uint32_t _uniqueID = W25Qxx_ReadID();
   // if (_uniqueID) {

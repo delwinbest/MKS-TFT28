@@ -1,16 +1,16 @@
-// #ifndef __sdcard_H
-// #define __sdcard_H
+#ifndef __sdcard_H
+#define __sdcard_H
 
-// #include <SD.h>
+#include <SD.h>
 
-// class SDCard {
-//     public:
-//         Sd2Card card;
-//         SdVolume volume;
-//         File root;
-//         void init();
-//         void printDirectory(File dir);
-// };
+class SDCard {
+    public:
+        Sd2Card card;
+        SdVolume volume;
+        File root;
+        void init();
+        void printDirectory(File dir);
+};
 
 
-// #endif 
+#endif 
