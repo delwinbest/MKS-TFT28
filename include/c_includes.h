@@ -10,20 +10,13 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <Arduino.h>
 #include "settings.h"
 #include "configuration.h"
-//#include "w25qxx.h"
-#include "buzzer.h"
-#include "lcd.h"
-//#include "UTFT.h"
-//#include "URTouch.h"
-//#include "eeprom_config.h"
 #include "sd.h"
 #include "ff.h"
 #include "vfs.h"
 #include "myfatfs.h"
-//#include "Language.h"
+#include "Language.h"
 #include "misc.h"
 
 

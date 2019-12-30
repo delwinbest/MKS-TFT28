@@ -1,7 +1,8 @@
 #include "includes.h"
+//#include "lcd.h"
 //#include<SPIMemory.h>
 
-// LCD lcd;
+LCD lcd;
 // URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
 //EEPROMConfig eeprom_config;
 //SDCard sdcard;
@@ -14,11 +15,11 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(115200);  //TX=PA9,RX=PA10
   Serial.println("Booting");
-  //BUZZER_Init();
+  BUZZER_Init();
   // Setup the LCD
-  // lcd.init();
-  // lcd.lcd_console_log("Booting...");
-  // lcd.lcd_console_log("URTouch Init...");
+  lcd.init();
+  lcd.lcd_console_log("Booting...");
+  lcd.lcd_console_log("URTouch Init...");
   //myTouch.InitTouch(1);
   //myTouch.setPrecision(PREC_MEDIUM);
   //eeprom_config.loadConfig();

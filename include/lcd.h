@@ -33,4 +33,4 @@ class LCD
         void drawBitmap(int x, int y, int sx, int sy, unsigned short* data, int scale);
 };
 
-#endif /*__ helperfunctions_H */
+#endif 
