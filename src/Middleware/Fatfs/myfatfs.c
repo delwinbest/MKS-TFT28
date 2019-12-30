@@ -49,7 +49,7 @@ bool scanPrintFilesFatFs(void)
     {
       if (infoFile.F_num >= FOLDER_NUM)  continue;
 
-      infoFile.folder[infoFile.F_num] = (char *)malloc(len);
+      infoFile.folder[infoFile.F_num] = malloc(len);
       if (infoFile.folder[infoFile.F_num] == NULL)  break;
       memcpy(infoFile.folder[infoFile.F_num++], finfo.fname, len);
     }
@@ -59,7 +59,7 @@ bool scanPrintFilesFatFs(void)
       
       if (strstr(finfo.fname, ".gcode") == NULL)  continue;
 
-      infoFile.file[infoFile.f_num] = (char *)malloc(len);
+      infoFile.file[infoFile.f_num] = malloc(len);
       if (infoFile.file[infoFile.f_num] == NULL)  break;
       memcpy(infoFile.file[infoFile.f_num++], finfo.fname, len);
     }		
@@ -119,7 +119,7 @@ bool Get_NewestGcode(const TCHAR* path)
 
     if((finfo.fattrib&AM_DIR) == AM_DIR)
     {				
-      char  *nextdirpath = (char *)malloc(len+strlen(finfo.fname)+2);
+      char  *nextdirpath = malloc(len+strlen(finfo.fname)+2);
       if(nextdirpath==NULL)                         break;
 
       strcpy(nextdirpath, path);
