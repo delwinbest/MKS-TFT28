@@ -32,8 +32,8 @@ void USART_Protocol_Init(uint8_t port,uint32_t baud)
     case _USART1: RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); break;
     case _USART2: RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART2, ENABLE); break;
     case _USART3: RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE); break;
-    case _UART4:  RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);  break;
-    case _UART5:  RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);  break;
+    //case _UART4:  RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);  break;
+    //case _UART5:  RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);  break;
   }
   USART_InitStructure.USART_BaudRate = baud;
   USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
@@ -48,8 +48,8 @@ void USART_Protocol_Init(uint8_t port,uint32_t baud)
 
 void USART_IRQ_Init(uint8_t port, uint16_t usart_it)
 {
-  uint32_t IRQ_Channel[_USART_CNT] = {USART1_IRQn, USART2_IRQn, USART3_IRQn, UART4_IRQn, UART5_IRQn};
-
+  //uint32_t IRQ_Channel[_USART_CNT] = {USART1_IRQn, USART2_IRQn, USART3_IRQn, UART4_IRQn, UART5_IRQn};
+  uint32_t IRQ_Channel[_USART_CNT] = {USART1_IRQn, USART2_IRQn, USART3_IRQn};
   NVIC_InitTypeDef NVIC_InitStructure;
   NVIC_InitStructure.NVIC_IRQChannel = IRQ_Channel[port];
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
@@ -85,27 +85,27 @@ void USART_DeConfig(uint8_t port)
       RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, ENABLE);
       RCC_APB1PeriphClockCmd(RCC_APB1Periph_USART3, DISABLE);
       break;
-    case _UART4:
-      RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
-      RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, DISABLE);
-      break;
-    case _UART5:
-      RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
-      RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, DISABLE);
-      break;  
+    // case _UART4:
+    //   RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, ENABLE);
+    //   RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART4, DISABLE);
+    //   break;
+    // case _UART5:
+    //   RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, ENABLE);
+    //   RCC_APB1PeriphClockCmd(RCC_APB1Periph_UART5, DISABLE);
+    //   break;  
   }
 }
 
 void USART_Write(uint8_t port, uint8_t d)
 {
   while((usart[port]->SR & USART_FLAG_TC) == (uint16_t)RESET);
-  usart[port]->DR = ((u16)d & (uint16_t)0x01FF);
+  usart[port]->DR = ((uint16_t)d & (uint16_t)0x01FF);
 }
 void USART_Puts(uint8_t port, uint8_t *str)
 {
   while (*str)
   {
     while((usart[port]->SR & USART_FLAG_TC) == (uint16_t)RESET);
-    usart[port]->DR = ((u16)*str++ & (uint16_t)0x01FF);
+    usart[port]->DR = ((uint16_t)*str++ & (uint16_t)0x01FF);
   }
 }

@@ -3,6 +3,10 @@
 
 #include "stm32f10x_conf.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define _USART1    0
 #define _USART2    1
 #define _USART3    2
@@ -14,5 +18,9 @@ void USART_Config(uint8_t port, uint32_t baud, uint16_t usart_it);
 void USART_DeConfig(uint8_t port);
 void USART_Puts(uint8_t port, uint8_t *str);
 void USART_Write(uint8_t port, uint8_t d);
-    
+
+#ifdef __cplusplus
+}
+#endif
+   
 #endif
