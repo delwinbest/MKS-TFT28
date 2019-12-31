@@ -1,9 +1,12 @@
 #ifndef _SD_H_
 #define _SD_H_
 
-#include "c_includes.h"
-				
-  
+#ifdef __cplusplus
+extern "C" {
+#endif				
+
+#include "stdint.h"
+
 #define SD_TYPE_ERR     0X00
 #define SD_TYPE_MMC     0X01
 #define SD_TYPE_V1      0X02
@@ -56,7 +59,8 @@ uint8_t SD_Get_Ack(uint8_t Response);
 uint32_t SD_Get_Sector_Count(void);   					
 uint8_t SD_GetCID(uint8_t *cid_data);                         
 uint8_t SD_GetCSD(uint8_t *csd_data);                        
-
+#ifdef __cplusplus
+}
 #endif
 
-
+#endif

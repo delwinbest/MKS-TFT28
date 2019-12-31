@@ -3,8 +3,16 @@
 
 #include "stdbool.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 bool mountSDCard(void);
 bool mountUDisk(void);
 bool scanPrintFilesFatFs(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif 

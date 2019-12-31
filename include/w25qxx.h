@@ -1,7 +1,11 @@
 #ifndef _W25QXX_H_
 #define _W25QXX_H_
-#include "includes.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "stdint.h"
 
 #define CMD_WRITE_ENABLE   0x06
 #define CMD_WRITE_DISABLE  0x04
@@ -18,21 +22,22 @@
 #define W25QXX_DUMMY_BYTE  0xFF
 #define W25QXX_SPI_PAGESIZE 0x100
 
-extern "C" {
-    uint8_t W25Qxx_SPI_Read_Write_Byte(uint8_t data);
-    void W25Qxx_SPI_CS_Set(uint8_t level);
-    void W25Qxx_Init(void);
+uint8_t W25Qxx_SPI_Read_Write_Byte(uint8_t data);
+void W25Qxx_SPI_CS_Set(uint8_t level);
+void W25Qxx_Init(void);
 
-    void W25Qxx_WriteEnable(void);
-    void W25Qxx_WaitForWriteEnd(void);
-    void W25Qxx_WritePage(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-    void W25Qxx_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
-    void W25Qxx_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
-    void W25Qxx_EraseSector(uint32_t SectorAddr);
-    void W25Qxx_EraseBlock(uint32_t BlockAddr);
-    void W25Qxx_EraseBulk(void);
-    uint32_t W25Qxx_ReadID(void);
+void W25Qxx_WriteEnable(void);
+void W25Qxx_WaitForWriteEnd(void);
+void W25Qxx_WritePage(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+void W25Qxx_WriteBuffer(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite);
+void W25Qxx_ReadBuffer(uint8_t* pBuffer, uint32_t ReadAddr, uint16_t NumByteToRead);
+void W25Qxx_EraseSector(uint32_t SectorAddr);
+void W25Qxx_EraseBlock(uint32_t BlockAddr);
+void W25Qxx_EraseBulk(void);
+uint32_t W25Qxx_ReadID(void);
+#ifdef __cplusplus
 }
+#endif
 
 #endif 
 

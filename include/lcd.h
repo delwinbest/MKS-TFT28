@@ -18,6 +18,8 @@
 #define BRRED                 0XFC07 //
 #define GRAY                  0X8430 //
 
+#include <Arduino.h>
+
 class LCD 
 {
     public:

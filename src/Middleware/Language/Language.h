@@ -4,6 +4,9 @@
 #include "stdbool.h"
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 enum
 {
@@ -180,5 +183,9 @@ enum
 };
 
 uint8_t * textSelect(uint8_t sel);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

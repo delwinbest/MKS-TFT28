@@ -1,5 +1,5 @@
-//#include "variants.h"
-#include "includes.h"
+#include "delay.h"
+#include <Arduino.h>
 
 static uint16_t fac_ms=0;
 static uint8_t fac_us=0;
@@ -39,9 +39,9 @@ void Delay_ms(uint16_t ms)					//��ʱС��1800ms
   SysTick->VAL=0x00;
 }
 
-void Delay(int time)
-{
-  int i;
-  while(time--)
-  for(i=0;i<120;i++);
-}
+// void Delay(int time)
+// {
+//   int i;
+//   while(time--)
+//   for(i=0;i<120;i++);
+// }

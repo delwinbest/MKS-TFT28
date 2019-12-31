@@ -1,6 +1,9 @@
 #ifndef _MY_MISC_H_
 #define _MY_MISC_H_
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 // Macros to make a string from a macro
 #define STRINGIFY_(M) #M
@@ -29,5 +32,9 @@ int  limitValue(int min, int value, int max);
 long map(long x, long in_min, long in_max, long out_min, long out_max);
 int  my_vsprintf(char *buf, const char *fmt, my_va_list args);
 void my_sprintf(char *buf, const char *fmt, ...);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

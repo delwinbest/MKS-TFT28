@@ -1,4 +1,5 @@
 #include "includes.h"
+
 //#include<SPIMemory.h>
 
 LCD lcd;
@@ -36,10 +37,6 @@ void setup() {
     lcd.lcd_console_log("SD ERR");
   }
 
-  //sdcard.init();
-  // if(sdcard.root.name() != NULL){
-  //   sdcard.printDirectory(sdcard.root);
-  // }
   lcd.lcd_console_log("SPIFlash Begin...");
   W25Qxx_Init();
 
@@ -52,6 +49,11 @@ void setup() {
   
 
   lcd.lcd_console_log("End Setup");
+  if (mountFS() == true) {
+     lcd.lcd_console_log("FS Mounted");
+  } else {
+    lcd.lcd_console_log("FS NOT Mounted");
+  }
   lcd.consoleLine = 1;
   delay(500);
 }

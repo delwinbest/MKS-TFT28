@@ -3,6 +3,10 @@
 
 #include "stdint.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
   uint32_t startCodePoint; // start unicode code point for language
   uint32_t endCodePoint; // end unicode code point for language
@@ -28,5 +32,9 @@ typedef struct
 
 void getCharacterInfo(const uint8_t *ch, CHAR_INFO *pInfo);
 uint16_t GUI_StrPixelWidth(const uint8_t *const str);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

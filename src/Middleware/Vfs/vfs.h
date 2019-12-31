@@ -5,6 +5,10 @@
 #include "stdbool.h"
 #include "ff.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #define FOLDER_NUM   255
 #define FILE_NUM     255
 #define MAX_PATH_LEN 1024
@@ -40,5 +44,9 @@ bool IsRootDir(void);
 
 bool isVolumeExist(uint8_t src);
 void loopVolumeSource(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif 

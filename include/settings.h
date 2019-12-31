@@ -3,6 +3,10 @@
 
 #include "stdint.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef enum
 {
   SERIAL_TSC = 0,
@@ -28,5 +32,9 @@ extern SETTINGS infoSettings;
 
 // void infoSettingsReset(void);
 // void menuSettings(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

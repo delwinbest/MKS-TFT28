@@ -1,4 +1,5 @@
 #include "sd.h"
+#include <Arduino.h>
 #include "SPI.h"
 
 #define SDCARD_SPI     SPI

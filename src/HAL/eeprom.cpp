@@ -1,7 +1,7 @@
-#include "includes.h"
-#include <Wire.h>
-
 #include "eeprom.h"
+#include <Wire.h>
+#include <Arduino.h>
+
 
 void EEPROM::init()
 {
@@ -14,9 +14,9 @@ void EEPROM::init()
 }
 
 
-byte EEPROM::readEEPROM(int deviceaddress, unsigned int eeaddress) 
+uint8_t EEPROM::readEEPROM(int deviceaddress, unsigned int eeaddress) 
 {
-    byte rdata = 0xFF;
+    uint8_t rdata = 0xFF;
     Wire.beginTransmission(deviceaddress);
     Wire.write(eeaddress);
     Wire.endTransmission(true);
@@ -28,7 +28,7 @@ byte EEPROM::readEEPROM(int deviceaddress, unsigned int eeaddress)
     return rdata;
 }
 
-void EEPROM::writeEEPROM(int deviceaddress, unsigned int eeaddress, byte data ) 
+void EEPROM::writeEEPROM(int deviceaddress, unsigned int eeaddress, uint8_t data ) 
 {
     Wire.beginTransmission(deviceaddress);
     Wire.write(eeaddress);
