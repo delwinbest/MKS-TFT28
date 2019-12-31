@@ -17,10 +17,10 @@
 // *** Hardwarespecific defines ***
 #ifndef __HW_HALMX_H__
 #define __HW_HALMX_H__
-#ifndef defined(STM32F107xC)
-#define cbi(reg, bitmask) {}
-#define sbi(reg, bitmask) {}
-#endif
+// #ifndef defined(STM32F107xC)
+// #define cbi(reg, bitmask) {}
+// #define sbi(reg, bitmask) {}
+// #endif
 #define pulse_high(reg, bitmask)  sbi(reg, bitmask); cbi(reg, bitmask);
 #define pulse_low(reg, bitmask)   cbi(reg, bitmask); sbi(reg, bitmask);
 

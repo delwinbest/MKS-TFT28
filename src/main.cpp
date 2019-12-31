@@ -1,8 +1,8 @@
 #include "includes.h"
+
 //#include<SPIMemory.h>
 
 LCD lcd;
-EEPROM eeprom;
 URTouch  myTouch(PIN_SPI1_SCK , TOUCH_CS, PIN_SPI1_MOSI,PIN_SPI1_MISO, TOUCH_DI);
 EEPROMConfig eeprom_config;
 //SDCard sdcard;
@@ -22,7 +22,6 @@ void setup() {
   lcd.lcd_console_log("URTouch Init...");
   myTouch.InitTouch(1);
   myTouch.setPrecision(PREC_MEDIUM);
-  eeprom.init();
   eeprom_config.loadConfig();
   lcd.lcd_console_log("SD Test Init...");
   if(SD_Init() == 0){
@@ -38,10 +37,6 @@ void setup() {
     lcd.lcd_console_log("SD ERR");
   }
 
-  //sdcard.init();
-  // if(sdcard.root.name() != NULL){
-  //   sdcard.printDirectory(sdcard.root);
-  // }
   lcd.lcd_console_log("SPIFlash Begin...");
   W25Qxx_Init();
 
@@ -54,6 +49,11 @@ void setup() {
   
 
   lcd.lcd_console_log("End Setup");
+  if (mountFS() == true) {
+     lcd.lcd_console_log("FS Mounted");
+  } else {
+    lcd.lcd_console_log("FS NOT Mounted");
+  }
   lcd.consoleLine = 1;
   delay(500);
 }

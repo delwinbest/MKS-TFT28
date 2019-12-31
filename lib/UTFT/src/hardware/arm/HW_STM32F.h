@@ -21,12 +21,12 @@ typedef struct
 #endif
 #define TFT_LCD_BASE 0x40011800
 #define   TFT_LCD             ((LCD_IO_TypeDef *) TFT_LCD_BASE)
-	#if defined(STM32F107xC)
+	// #if defined(STM32F107xC)
 
-	#define sbi(reg, bitmask) *reg |= bitmask
-	#define cbi(reg, bitmask) *reg |= bitmask
+	// #define sbi(reg, bitmask) *reg |= bitmask
+	// #define cbi(reg, bitmask) *reg |= bitmask
 
-	#endif
+	// #endif
 
 
 void UTFT::_hw_special_init(void)

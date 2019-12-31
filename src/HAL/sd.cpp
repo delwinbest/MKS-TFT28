@@ -1,8 +1,6 @@
 #include "sd.h"
+#include <Arduino.h>
 #include "SPI.h"
-
-
-#include "sd.h"
 
 #define SDCARD_SPI     SPI
 uint8_t  SD_Type=0;  
